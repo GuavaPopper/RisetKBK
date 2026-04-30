@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorotan dan Prestasi Karya Mahasiswa | Informatika UNTAN</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome untuk Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        condensed: ['"Roboto Condensed"', 'sans-serif'],
+                    },
+                    colors: {
+                        untan: {
+                            blue: '#005eb8',
+                            navy: '#003150',
+                            dark: '#001f36',
+                            yellow: '#feb401',
+                            light: '#f8fafc'
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 50px rgba(0, 49, 80, 0.08)',
+                        'soft-lg': '0 30px 60px rgba(0, 49, 80, 0.12)',
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        window.APP_CONFIG = window.APP_CONFIG || {
+            dashboardTargetUrl: '',
+            dashboardProxyTemplates: []
+        };
+    </script>
+    <style>
+        /* Custom scrollbar untuk tampilan lebih rapi */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #003150;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #001f36;
+        }
+
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Navbar & Accessibility Fixes */
+        #nav-wrapper {
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #003150;
+            color: white;
+            padding: 8px 16px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .ticker-wrap {
+            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+        }
+
+        .ticker-track {
+            display: inline-flex;
+            white-space: nowrap;
+            min-width: max-content;
+            animation: tickerMove 30s linear infinite;
+        }
+
+        .ticker-wrap:hover .ticker-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes tickerMove {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .line-clamp-1 {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+        }
+
+        .line-clamp-2 {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+
+        .line-clamp-3 {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        }
+
+        .reveal {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal-ready .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .reveal-ready .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #back-to-top {
+            opacity: 0;
+            transform: translateY(8px);
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .ticker-track {
+                animation: none;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gray-50 font-sans text-gray-800 antialiased selection:bg-untan-yellow selection:text-untan-navy pt-[140px] lg:pt-[180px]">
+
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Langsung ke Konten Utama</a>
+
+    <!-- Navbar & Header -->
+    <div id="nav-wrapper"
+        class="fixed top-0 left-0 right-0 z-50 transition-shadow duration-300 shadow-sm border-b border-slate-200 will-change-auto bg-white">
+
+        <!-- Top Header: Logo & Right List -->
+        <div class="bg-untan-navy text-white py-3 lg:py-5 relative overflow-hidden">
+            <div class="absolute inset-0 w-full overflow-hidden pointer-events-none">
+                <div
+                    class="absolute inset-0 opacity-[0.02] font-mono text-[10px] md:text-[12px] text-white select-none leading-snug whitespace-pre-wrap break-all text-right">
+                    01101001 01101110 01100110 01101111 01110010 01101101 01100001 01110100 01101001
+                    01101011 01100001 00100000 01110101 01101110 01110100 01100001 01101110 00100000
+                    01100010 01101001 01110011 01100001 01101001 01101110 01100110 01101111 01110010
+                    01101101 01100001 01110100 01101001 01101011 01100001 00100000 01110101 01101110
+                </div>
+            </div>
+
+            <div class="w-full px-4 lg:px-8 flex justify-between items-center relative z-10">
+                <!-- Left: Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative w-14 h-14 lg:w-16 lg:h-16 flex items-center justify-center shrink-0">
+                        <img src="https://upload.wikimedia.org/wikipedia/id/0/03/Lambang_Universitas_Tanjungpura.png"
+                            alt="Logo Universitas Tanjungpura"
+                            class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105 group-hover:rotate-3 relative z-10">
+                    </div>
+                    <div class="border-l-[1.5px] border-white/30 pl-3 lg:pl-4 py-1 flex flex-col justify-center">
+                        <span
+                            class="text-xl lg:text-[22px] font-bold tracking-[0.15em] text-white leading-none font-sans drop-shadow-sm mb-1 uppercase">INFORMATIKA</span>
+                        <span
+                            class="text-[9px] lg:text-[11px] font-normal tracking-[0.25em] text-slate-200 mt-0.5 opacity-90 drop-shadow-sm uppercase font-sans">UNIVERSITAS
+                            TANJUNGPURA</span>
+                    </div>
+                </a>
+
+                <!-- Right List (Seperti Gambar 2) -->
+                <div class="hidden lg:flex items-center">
+                    <a href="https://satu.untan.ac.id" target="_blank"
+                        class="font-bold text-white text-[13px] hover:text-untan-yellow transition-colors font-sans tracking-wide">
+                        SATU UNTAN
+                    </a>
+                    <!-- Garis pembatas lurus -->
+                    <div class="w-[1px] h-[18px] bg-white/40 mx-4"></div>
+                    <button id="lang-toggle-btn"
+                        class="flex items-center text-[13px] font-sans tracking-wide hover:text-untan-yellow transition-colors"
+                        onclick="setLanguage(currentLang === 'id' ? 'en' : 'id')">
+                        <span class="font-bold text-white">ID</span>
+                        <span class="text-white/40 mx-2">|</span>
+                        <span class="font-normal text-white">EN</span>
+                    </button>
+                    <!-- Icon Accessibility Bulat -->
+                    <button
+                        class="ml-5 w-[24px] h-[24px] bg-white text-untan-navy rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                        <i class="fas fa-universal-access text-[12px]" aria-hidden="true"></i>
+                    </button>
+                    <!-- Icon Search -->
+                    <button class="ml-4 text-white hover:text-untan-yellow transition-colors">
+                        <i class="fas fa-search text-[18px]" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <button id="mobile-menu-btn" aria-controls="mobile-menu" aria-expanded="false"
+                    aria-label="Buka menu navigasi"
+                    class="lg:hidden text-xl text-white w-9 h-9 flex items-center justify-center rounded-sm hover:bg-white/10 transition-colors">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Yellow Menu Bar (Seperti Gambar 1) -->
+        <nav class="bg-[#feb401] hidden lg:block relative w-full shadow-sm z-20">
+            <div class="w-full px-4 lg:px-8 flex justify-center items-center py-3.5 gap-10">
+                <button
+                    class="flex items-center gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[14px] uppercase tracking-wide transition-colors">
+                    TENTANG KAMI <i class="fas fa-chevron-down text-[9px] opacity-80 pt-0.5"></i>
+                </button>
+                <button
+                    class="flex items-center gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[14px] uppercase tracking-wide transition-colors">
+                    PROGRAM <i class="fas fa-chevron-down text-[9px] opacity-80 pt-0.5"></i>
+                </button>
+                <button
+                    class="flex items-center gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[14px] uppercase tracking-wide transition-colors">
+                    SDM <i class="fas fa-chevron-down text-[9px] opacity-80 pt-0.5"></i>
+                </button>
+                <button
+                    class="flex items-center gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[14px] uppercase tracking-wide transition-colors">
+                    FASILITAS <i class="fas fa-chevron-down text-[9px] opacity-80 pt-0.5"></i>
+                </button>
+                <button
+                    class="flex items-center gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[14px] uppercase tracking-wide transition-colors">
+                    KARYA & AGENDA <i class="fas fa-chevron-down text-[9px] opacity-80 pt-0.5"></i>
+                </button>
+                <button
+                    class="flex items-center gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[14px] uppercase tracking-wide transition-colors">
+                    KONTAK <i class="fas fa-chevron-down text-[9px] opacity-80 pt-0.5"></i>
+                </button>
+            </div>
+        </nav>
+        <nav id="mobile-menu" class="lg:hidden hidden bg-white border-t border-slate-200 px-4 py-4 shadow-soft"
+            aria-label="Menu Mobile">
+            <div class="grid grid-cols-2 gap-2 text-[12px] font-bold uppercase tracking-wide text-untan-navy">
+                <a href="#kbk-section"
+                    class="px-3 py-2 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link">Tentang
+                    Kami</a>
+                <a href="#riset-section"
+                    class="px-3 py-2 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link">Program</a>
+                <a href="#dosen-section"
+                    class="px-3 py-2 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link">SDM</a>
+                <a href="#lab-section"
+                    class="px-3 py-2 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link">Fasilitas</a>
+                <a href="#riset-section"
+                    class="px-3 py-2 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link">Karya
+                    & Agenda</a>
+                <a href="#cta-section"
+                    class="px-3 py-2 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link">Kontak</a>
+            </div>
+            <button id="mobile-lang-toggle-btn" onclick="setLanguage(currentLang === 'id' ? 'en' : 'id')"
+                class="mt-4 w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm font-bold text-untan-navy hover:bg-slate-50 transition-colors">
+                Bahasa: ID
+            </button>
+        </nav>
+
+        <!-- Info Terbaru (Ticker) -->
+        <div
+            class="bg-untan-navy text-white flex items-center h-[42px] w-full px-4 lg:px-8 relative z-10 border-t border-white/5">
+            <div class="bg-[#feb401] text-[#003150] font-bold font-condensed px-3 py-1.5 text-[12px] uppercase whitespace-nowrap tracking-wide"
+                data-i18n="info">
+                INFO TERBARU
+            </div>
+            <div class="flex-1 overflow-hidden relative flex items-center px-4 h-full ticker-wrap">
+                <div class="ticker-track text-white text-[13px] font-sans flex items-center">
+                    <span class="mx-4" data-i18n="tickerItem1">Selamat datang di antarmuka situs web Informatika
+                        terbaru!</span> <span class="text-white/40 mx-2">|</span>
+                    <span class="mx-4" data-i18n="tickerItem2">Selamat menunaikan ibadah puasa Ramadhan 1447 H</span>
+                    <span class="text-white/40 mx-2">|</span>
+                    <span class="mx-4" data-i18n="tickerItem3">Selamat Tahun Baru Imlek 2026! Gong Xi Fa Cai</span>
+                    <span class="text-white/40 mx-2">|</span>
+                    <span class="mx-4" data-i18n="tickerItem1">Selamat datang di antarmuka situs web Informatika
+                        terbaru!</span> <span class="text-white/40 mx-2">|</span>
+                    <span class="mx-4" data-i18n="tickerItem2">Selamat menunaikan ibadah puasa Ramadhan 1447 H</span>
+                    <span class="text-white/40 mx-2">|</span>
+                    <span class="mx-4" data-i18n="tickerItem3">Selamat Tahun Baru Imlek 2026! Gong Xi Fa Cai</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breadcrumb (Diubah menyesuaikan pepet kiri navbar) -->
+    <div class="bg-white">
+        <div class="w-full px-4 lg:px-8 py-8 text-xs font-medium text-gray-500 uppercase">
+            <span data-i18n="home">BERANDA</span> <span class="mx-2">/</span> <span class="text-untan-blue font-bold"
+                data-i18n="pageTitle">RISET & KBK</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="bg-untan-navy relative reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 md:py-24">
+            <div class="inline-block bg-untan-yellow text-untan-navy text-xs font-bold px-3 py-1 rounded mb-4 uppercase tracking-wider"
+                data-i18n="badgeHero">
+                Riset & Kelompok Bidang Keahlian
+            </div>
+            <h2 class="text-3xl md:text-5xl font-bold font-condensed text-white mb-4 leading-tight"
+                data-i18n="heroTitle">
+                Riset & Kelompok Bidang Keahlian
+            </h2>
+            <p class="text-gray-300 max-w-2xl text-lg mb-8" data-i18n="heroDesc">
+                Kenali Kelompok Bidang Keahlian (KBK) kami. Jelajahi riset unggulan dosen dan mahasiswa di bidang
+                Kecerdasan Buatan (AI), Rekayasa Perangkat Lunak, hingga IoT
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#kbk-section"
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-untan-yellow text-untan-navy font-bold hover:bg-yellow-300 transition-colors">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span data-i18n="quickActionKbk">Jelajahi KBK</span>
+                </a>
+                <a href="#riset-section"
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/30 text-white font-bold hover:bg-white/10 transition-colors">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    <span data-i18n="quickActionRiset">Cari Publikasi</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content Sections -->
+    <main id="main-content">
+        <!-- KBK Section -->
+        <section class="bg-slate-50 py-16 lg:py-24 border-t border-gray-100 reveal" id="kbk-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span
+                        class="inline-block bg-untan-blue/10 text-untan-blue text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4"
+                        data-i18n="badgeHero">Kelompok Bidang Keahlian</span>
+                    <h2 class="text-3xl md:text-5xl font-bold font-condensed text-untan-navy mb-4" data-i18n="kbkTitle">
+                        4 Pilar Keilmuan Informatika UNTAN</h2>
+                    <p class="text-gray-500 max-w-2xl mx-auto text-lg" data-i18n="kbkDesc">Setiap KBK berfokus pada
+                        topik riset spesifik, dipimpin dosen berpengalaman, dan terbuka untuk kolaborasi.</p>
+                </div>
+
+                <div id="kbk-card-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- AI Card -->
+                    <article data-kbk-card="ai"
+                        class="bg-white p-8 rounded-3xl shadow-soft border border-gray-100 hover:shadow-soft-lg hover:border-untan-yellow transition-all duration-500 group flex flex-col h-full border-t-4 border-t-untan-navy">
+                        <div
+                            class="w-14 h-14 bg-slate-50 text-untan-navy rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-untan-yellow group-hover:text-untan-navy transition-all duration-300">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-untan-navy mb-4" data-i18n="filterAI">Kecerdasan Buatan</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-6 flex-grow">Sistem cerdas berbasis AI, deep
+                            learning, vision, dan NLP untuk solusi nyata.</p>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span
+                                class="text-[10px] bg-slate-50 text-gray-500 border border-gray-100 px-3 py-1 rounded-lg font-mono">Vision</span>
+                            <span
+                                class="text-[10px] bg-slate-50 text-gray-500 border border-gray-100 px-3 py-1 rounded-lg font-mono">NLP</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+                            <div class="flex -space-x-2">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-untan-navy border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
+                                    AS</div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-untan-blue border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
+                                    RH</div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-gray-400 shadow-sm">
+                                    +6</div>
+                            </div>
+                            <button type="button" onclick="openKbkInsight('ai')"
+                                aria-label="Lihat detail Kecerdasan Buatan"
+                                class="text-untan-yellow group-hover:translate-x-1 transition-transform">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- RPL Card -->
+                    <article data-kbk-card="rpl"
+                        class="bg-white p-8 rounded-3xl shadow-soft border border-gray-100 hover:shadow-soft-lg hover:border-untan-yellow transition-all duration-500 group flex flex-col h-full border-t-4 border-t-untan-navy">
+                        <div
+                            class="w-14 h-14 bg-slate-50 text-untan-navy rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-untan-yellow group-hover:text-untan-navy transition-all duration-300">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-untan-navy mb-4" data-i18n="filterRPL">Rekayasa Perangkat
+                            Lunak</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-6 flex-grow">Metodologi, arsitektur, dan
+                            kualitas perangkat lunak modern serta DevOps.</p>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span
+                                class="text-[10px] bg-slate-50 text-gray-500 border border-gray-100 px-3 py-1 rounded-lg font-mono">DevOps</span>
+                            <span
+                                class="text-[10px] bg-slate-50 text-gray-500 border border-gray-100 px-3 py-1 rounded-lg font-mono">Agile</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+                            <div class="flex -space-x-2">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-untan-navy border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
+                                    DW</div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-untan-blue border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
+                                    PN</div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-gray-400 shadow-sm">
+                                    +8</div>
+                            </div>
+                            <button type="button" onclick="openKbkInsight('rpl')"
+                                aria-label="Lihat detail Rekayasa Perangkat Lunak"
+                                class="text-untan-yellow group-hover:translate-x-1 transition-transform">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Net Card -->
+                    <article data-kbk-card="net"
+                        class="bg-white p-8 rounded-3xl shadow-soft border border-gray-100 hover:shadow-soft-lg hover:border-untan-yellow transition-all duration-500 group flex flex-col h-full border-t-4 border-t-untan-navy">
+                        <div
+                            class="w-14 h-14 bg-slate-50 text-untan-navy rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-untan-yellow group-hover:text-untan-navy transition-all duration-300">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-untan-navy mb-4" data-i18n="filterNet">Jaringan & Keamanan
+                        </h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-6 flex-grow">Infrastruktur jaringan handal,
+                            keamanan siber, dan teknologi Cloud/IoT.</p>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span
+                                class="text-[10px] bg-slate-50 text-gray-500 border border-gray-100 px-3 py-1 rounded-lg font-mono">Cybersec</span>
+                            <span
+                                class="text-[10px] bg-slate-50 text-gray-500 border border-gray-100 px-3 py-1 rounded-lg font-mono">IoT</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+                            <div class="flex -space-x-2">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-untan-navy border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
+                                    HF</div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-untan-blue border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
+                                    SA</div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-gray-400 shadow-sm">
+                                    +5</div>
+                            </div>
+                            <button type="button" onclick="openKbkInsight('net')"
+                                aria-label="Lihat detail Jaringan dan Keamanan"
+                                class="text-untan-yellow group-hover:translate-x-1 transition-transform">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- SI Card -->
+                    <article data-kbk-card="si"
+                        class="bg-white p-8 rounded-3xl shadow-soft border border-gray-100 hover:shadow-soft-lg hover:border-untan-yellow transition-all duration-500 group flex flex-col h-full border-t-4 border-t-untan-navy">
+                        <div
+                            class="w-14 h-14 bg-slate-50 text-untan-navy rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-untan-yellow group-hover:text-untan-navy transition-all duration-300">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-untan-navy mb-4" data-i18n="filterSI">Sistem Informasi</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-6 flex-grow">Manajemen informasi, GIS, big
+                            data, dan sistem pendukung keputusan.</p>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span
+                                class="text-[10px] bg-slate-50 text-gray-500 border border-gray-100 px-3 py-1 rounded-lg font-mono">Big
+                                Data</span>
+                            <span
+                                class="text-[10px] bg-slate-50 text-gray-500 border border-gray-100 px-3 py-1 rounded-lg font-mono">GIS</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+                            <div class="flex -space-x-2">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-untan-navy border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
+                                    LP</div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-untan-blue border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
+                                    FN</div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-gray-400 shadow-sm">
+                                    +4</div>
+                            </div>
+                            <button type="button" onclick="openKbkInsight('si')"
+                                aria-label="Lihat detail Sistem Informasi"
+                                class="text-untan-yellow group-hover:translate-x-1 transition-transform">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </article>
+                </div>
+
+                <section id="kbk-insight-section"
+                    class="mt-12 rounded-[2rem] border border-slate-100 bg-white shadow-soft overflow-hidden">
+                    <div class="grid lg:grid-cols-[0.95fr_1.05fr]">
+                        <div id="kbk-insight-hero"
+                            class="p-8 lg:p-10 border-b lg:border-b-0 lg:border-r border-slate-100 bg-gradient-to-br from-untan-blue/10 via-white to-untan-yellow/10">
+                            <div
+                                class="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] text-untan-blue">
+                                <i id="kbk-insight-icon" class="fa-solid fa-brain"></i>
+                                <span id="kbk-insight-badge">KBK Insight</span>
+                            </div>
+                            <h3 id="kbk-insight-title"
+                                class="mt-6 text-3xl md:text-4xl font-bold font-condensed text-untan-navy"></h3>
+                            <p id="kbk-insight-desc" class="mt-5 text-slate-600 text-base leading-relaxed"></p>
+                            <div class="mt-8 rounded-3xl border border-white/80 bg-white/90 p-6 shadow-soft">
+                                <p id="kbk-insight-lead-label"
+                                    class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
+                                <div class="mt-4 flex items-center gap-4">
+                                    <div id="kbk-insight-lead-initials"
+                                        class="flex h-16 w-16 items-center justify-center rounded-2xl bg-untan-navy text-white text-xl font-bold">
+                                    </div>
+                                    <div>
+                                        <h4 id="kbk-insight-lead-name" class="text-lg font-bold text-untan-navy"></h4>
+                                        <p id="kbk-insight-lead-rank" class="text-sm text-slate-500"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-8 lg:p-10">
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div class="rounded-3xl border border-slate-100 bg-slate-50 p-6">
+                                    <p id="kbk-focus-label"
+                                        class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
+                                    <p id="kbk-focus-text" class="mt-4 text-sm text-slate-600 leading-relaxed"></p>
+                                </div>
+                                <div class="rounded-3xl border border-slate-100 bg-slate-50 p-6">
+                                    <p id="kbk-output-label"
+                                        class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
+                                    <p id="kbk-output-text" class="mt-4 text-sm text-slate-600 leading-relaxed"></p>
+                                </div>
+                                <div class="rounded-3xl border border-slate-100 bg-slate-50 p-6">
+                                    <p id="kbk-collab-label"
+                                        class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
+                                    <p id="kbk-collab-text" class="mt-4 text-sm text-slate-600 leading-relaxed"></p>
+                                </div>
+                            </div>
+                            <div class="mt-8">
+                                <p id="kbk-topic-label"
+                                    class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
+                                <div id="kbk-topic-tags" class="mt-4 flex flex-wrap gap-3"></div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="bg-untan-navy py-16 relative overflow-hidden reveal">
+            <div class="absolute inset-0 opacity-[0.03] bg-pattern pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-2 lg:grid-cols-5 gap-10 text-center">
+                    <div>
+                        <div class="text-4xl lg:text-5xl font-bold font-condensed text-untan-yellow mb-2">180+</div>
+                        <p class="text-[10px] text-slate-300 uppercase tracking-widest font-bold" data-i18n="statsPub">
+                            Publikasi Terindeks</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl lg:text-5xl font-bold font-condensed text-white mb-2">12</div>
+                        <p class="text-[10px] text-slate-300 uppercase tracking-widest font-bold"
+                            data-i18n="statsHibah">Hibah Riset Aktif</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl lg:text-5xl font-bold font-condensed text-untan-yellow mb-2">31</div>
+                        <p class="text-[10px] text-slate-300 uppercase tracking-widest font-bold"
+                            data-i18n="statsDosen">Dosen Peneliti</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl lg:text-5xl font-bold font-condensed text-white mb-2">48+</div>
+                        <p class="text-[10px] text-slate-300 uppercase tracking-widest font-bold"
+                            data-i18n="statsKolaborasi">Kolaborasi Industri</p>
+                    </div>
+                    <div class="col-span-2 lg:col-span-1">
+                        <div class="text-4xl lg:text-5xl font-bold font-condensed text-untan-yellow mb-2">320+</div>
+                        <p class="text-[10px] text-slate-300 uppercase tracking-widest font-bold">Mahasiswa Terlibat</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Riset & Publikasi Section -->
+        <section class="py-20 lg:py-28 bg-white reveal" id="riset-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8">
+                    <div class="max-w-2xl">
+                        <span class="text-untan-blue font-bold text-xs uppercase tracking-widest mb-3 block">Academic
+                            Achievements</span>
+                        <h2 class="text-3xl md:text-5xl font-bold font-condensed text-untan-navy mb-6"
+                            data-i18n="risetTitle">Publikasi & Penelitian Terkini</h2>
+                        <div class="w-24 h-1 bg-untan-yellow rounded-full"></div>
+                    </div>
+
+                    <!-- Filter Controls -->
+                    <div class="w-full lg:w-auto space-y-3">
+                        <label for="riset-search"
+                            class="text-[11px] font-bold uppercase tracking-wider text-slate-500 block"
+                            data-i18n="searchLabel">Cari publikasi</label>
+                        <div class="relative">
+                            <i
+                                class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                            <input id="riset-search" oninput="searchRiset(this.value)"
+                                data-i18n-placeholder="searchPlaceholder" type="text"
+                                class="w-full lg:w-[320px] pl-10 pr-10 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-untan-blue focus:ring-2 focus:ring-untan-blue/10"
+                                placeholder="Cari judul, penulis, atau venue...">
+                            <button id="clear-riset-search"
+                                onclick="document.getElementById('riset-search').value=''; searchRiset('')"
+                                aria-label="Reset pencarian publikasi"
+                                class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors">
+                                <i class="fa-solid fa-xmark text-xs"></i>
+                            </button>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-4">
+                            <div class="flex flex-wrap gap-2 p-1.5 bg-gray-50 rounded-xl border border-gray-100">
+                                <button onclick="filterRiset('all')" data-filter="all"
+                                    class="filter-btn px-5 py-2.5 rounded-lg bg-untan-navy text-white shadow-soft font-bold text-[11px] uppercase tracking-wider transition-all"
+                                    data-i18n="filterAll">Semua</button>
+                                <button onclick="filterRiset('ai')" data-filter="ai"
+                                    class="filter-btn px-5 py-2.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-untan-navy font-bold text-[11px] uppercase tracking-wider transition-all"
+                                    data-i18n="filterAI">AI</button>
+                                <button onclick="filterRiset('rpl')" data-filter="rpl"
+                                    class="filter-btn px-5 py-2.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-untan-navy font-bold text-[11px] uppercase tracking-wider transition-all"
+                                    data-i18n="filterRPL">RPL</button>
+                                <button onclick="filterRiset('net')" data-filter="net"
+                                    class="filter-btn px-5 py-2.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-untan-navy font-bold text-[11px] uppercase tracking-wider transition-all"
+                                    data-i18n="filterNet">Jaringan</button>
+                                <button onclick="filterRiset('si')" data-filter="si"
+                                    class="filter-btn px-5 py-2.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-untan-navy font-bold text-[11px] uppercase tracking-wider transition-all"
+                                    data-i18n="filterSI">SI</button>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tampilkan:</span>
+                                <div class="flex gap-1.5">
+                                    <button onclick="setLimit(9)" data-limit="9"
+                                        class="limit-btn px-4 py-2 rounded-xl bg-untan-navy text-white shadow-soft text-[11px] font-bold transition-all">9</button>
+                                    <button onclick="setLimit(50)" data-limit="50"
+                                        class="limit-btn px-4 py-2 rounded-xl bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 text-[11px] font-bold transition-all">50</button>
+                                    <button onclick="setLimit(100)" data-limit="100"
+                                        class="limit-btn px-4 py-2 rounded-xl bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 text-[11px] font-bold transition-all">100</button>
+                                    <button onclick="setLimit(200)" data-limit="200"
+                                        class="limit-btn px-4 py-2 rounded-xl bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 text-[11px] font-bold transition-all">200</button>
+                                    <button onclick="setLimit(500)" data-limit="500"
+                                        class="limit-btn px-4 py-2 rounded-xl bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 text-[11px] font-bold transition-all">500</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="riset-count-info"
+                            class="mt-4 text-[11px] font-medium text-slate-400 uppercase tracking-widest">
+                            Menghitung data...
+                        </div>
+                    </div>
+                </div>
+
+                <div id="riset-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <!-- Cards generated by JS -->
+                </div>
+
+                <div id="view-all-section" class="text-center" style="display: none;">
+                    <button onclick="setLimit(50)"
+                        class="group inline-flex items-center gap-3 px-10 py-4 bg-white border-2 border-untan-navy text-untan-navy font-bold rounded-full hover:bg-untan-navy hover:text-white transition-all duration-300">
+                        <span data-i18n="viewAll">Lihat Publikasi Lainnya</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dosen Section -->
+        <section class="py-20 lg:py-28 bg-gray-50 reveal" id="dosen-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <span
+                        class="inline-block bg-blue-100 text-untan-blue text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4">Experts
+                        Directory</span>
+                    <h2 class="text-3xl md:text-5xl font-bold font-condensed text-gray-900 mb-6" data-i18n="dosenTitle">
+                        Peneliti & Dosen per Kelompok Keahlian</h2>
+                    <p class="max-w-3xl mx-auto text-slate-500 text-lg" data-i18n="dosenLeadDesc">Bagian ini menampilkan
+                        ketua setiap KBK. Pilih kartu untuk melihat dosen lain di kelompok keahlian tersebut.</p>
+                </div>
+
+                <div id="dosen-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
+                    <!-- Cards generated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Labs Section -->
+        <section class="py-20 lg:py-32 bg-white reveal" id="lab-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-20 gap-12">
+                    <div class="max-w-2xl">
+                        <h2 class="text-3xl md:text-5xl font-bold font-condensed text-untan-navy mb-8 leading-tight"
+                            data-i18n="labTitle">Laboratorium Pendukung Riset</h2>
+                        <p class="text-slate-500 text-lg leading-relaxed">8 laboratorium modern dengan fasilitas terkini
+                            yang mendukung kegiatan riset strategis dan pengembangan teknologi dosen serta mahasiswa.
+                        </p>
+                    </div>
+                    <div class="shrink-0">
+                        <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 text-center shadow-soft">
+                            <div class="text-5xl font-bold text-untan-navy mb-2">08</div>
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em]">Labs Modern
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div
+                        class="p-10 rounded-[2.5rem] bg-white border border-slate-100 shadow-soft hover:shadow-soft-lg hover:border-untan-yellow transition-all duration-500 group">
+                        <div
+                            class="w-20 h-20 bg-slate-50 rounded-2xl flex items-center justify-center text-3xl mb-10 shadow-inner group-hover:bg-untan-blue/5 transition-colors duration-500 text-untan-navy">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold mb-5 text-untan-navy">Lab Kecerdasan Buatan</h4>
+                        <p class="text-slate-500 leading-relaxed mb-10">Workstation GPU NVIDIA A100 untuk riset
+                            komputasi tinggi, training model deep learning, dan computer vision.</p>
+                        <div class="flex flex-wrap gap-3 pt-8 border-t border-slate-50">
+                            <span
+                                class="text-[11px] font-mono font-bold text-slate-400 bg-slate-50 px-4 py-2 rounded-xl border border-slate-100 group-hover:text-untan-blue transition-colors">TensorFlow</span>
+                            <span
+                                class="text-[11px] font-mono font-bold text-slate-400 bg-slate-50 px-4 py-2 rounded-xl border border-slate-100 group-hover:text-untan-blue transition-colors">PyTorch</span>
+                        </div>
+                    </div>
+                    <div
+                        class="p-10 rounded-[2.5rem] bg-white border border-slate-100 shadow-soft hover:shadow-soft-lg hover:border-untan-yellow transition-all duration-500 group">
+                        <div
+                            class="w-20 h-20 bg-slate-50 rounded-2xl flex items-center justify-center text-3xl mb-10 shadow-inner group-hover:bg-untan-blue/5 transition-colors duration-500 text-untan-navy">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold mb-5 text-untan-navy">Lab Rekayasa PL</h4>
+                        <p class="text-slate-500 leading-relaxed mb-10">Pusat riset pengembangan perangkat lunak dengan
+                            pipeline modern CI/CD dan penjaminan kualitas sistem otomatis.</p>
+                        <div class="flex flex-wrap gap-3 pt-8 border-t border-slate-50">
+                            <span
+                                class="text-[11px] font-mono font-bold text-slate-400 bg-slate-50 px-4 py-2 rounded-xl border border-slate-100 group-hover:text-untan-blue transition-colors">DevOps</span>
+                            <span
+                                class="text-[11px] font-mono font-bold text-slate-400 bg-slate-50 px-4 py-2 rounded-xl border border-slate-100 group-hover:text-untan-blue transition-colors">Docker</span>
+                        </div>
+                    </div>
+                    <div
+                        class="p-10 rounded-[2.5rem] bg-white border border-slate-100 shadow-soft hover:shadow-soft-lg hover:border-untan-yellow transition-all duration-500 group">
+                        <div
+                            class="w-20 h-20 bg-slate-50 rounded-2xl flex items-center justify-center text-3xl mb-10 shadow-inner group-hover:bg-untan-blue/5 transition-colors duration-500 text-untan-navy">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold mb-5 text-untan-navy">Lab Keamanan Siber</h4>
+                        <p class="text-slate-500 leading-relaxed mb-10">Fasilitas simulasi serangan siber, audit
+                            keamanan jaringan fisik/virtual, serta forensik digital skala menengah.</p>
+                        <div class="flex flex-wrap gap-3 pt-8 border-t border-slate-50">
+                            <span
+                                class="text-[11px] font-mono font-bold text-slate-400 bg-slate-50 px-4 py-2 rounded-xl border border-slate-100 group-hover:text-untan-blue transition-colors">Kali
+                                Linux</span>
+                            <span
+                                class="text-[11px] font-mono font-bold text-slate-400 bg-slate-50 px-4 py-2 rounded-xl border border-slate-100 group-hover:text-untan-blue transition-colors">Wireshark</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="bg-slate-50 relative py-28 border-t border-slate-100 reveal" id="cta-section">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+                <div
+                    class="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-white text-untan-navy mb-12 shadow-soft rotate-3 hover:rotate-0 transition-transform duration-500">
+                    <i class="fa-solid fa-handshake-angle text-4xl"></i>
+                </div>
+                <h3 class="text-3xl md:text-5xl font-bold text-untan-navy mb-8 font-condensed tracking-tight"
+                    data-i18n="ctaTitle">Tertarik Berkolaborasi dengan KBK Kami?</h3>
+                <p class="text-slate-500 mb-14 text-xl leading-relaxed px-4 opacity-80" data-i18n="ctaDesc">
+                    Kami membuka peluang kerja sama riset lintas institusi, kemitraan strategis dengan industri, serta
+                    riset mahasiswa (skripsi/tesis) di bawah supervisi ahli kami.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                    <a href="mailto:info@informatika.untan.ac.id"
+                        class="group inline-flex items-center justify-center gap-4 px-14 py-5 text-lg font-bold text-untan-navy transition-all bg-untan-yellow rounded-2xl shadow-soft hover:bg-yellow-400 hover:-translate-y-1 active:scale-95">
+                        <i class="fa-solid fa-envelope text-xl group-hover:animate-bounce"></i>
+                        <span data-i18n="ctaBtn">Hubungi Kami</span>
+                    </a>
+                    <a href="#dosen-section"
+                        class="inline-flex items-center justify-center gap-4 px-12 py-5 text-lg font-bold text-slate-600 transition-all bg-white border border-slate-200 rounded-2xl shadow-soft hover:bg-slate-50 hover:border-slate-300">
+                        <span data-i18n="facultyDirectory">Direktori Dosen</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-untan-dark text-gray-400 py-8 border-t-4 border-untan-yellow">
+        <div class="max-w-7xl mx-auto px-4 text-center sm:flex sm:justify-between sm:text-left text-sm">
+            <p>&copy; 2026 Informatika Universitas Tanjungpura. All rights reserved.</p>
+            <div class="mt-4 sm:mt-0 space-x-4">
+                <a href="#" class="hover:text-white transition">Instagram</a>
+                <a href="#" class="hover:text-white transition">Website Utama</a>
+            </div>
+        </div>
+    </footer>
+    <button id="back-to-top" aria-label="Kembali ke atas"
+        class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-untan-navy text-white shadow-soft hover:bg-untan-blue transition-colors">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Data Shared -->
+
+    <!-- JavaScript untuk Logic Bilingual, Data Dummy, dan Filtering -->
+    <script>
+        let risetData = []; // Akan diisi dari data dashboard
+
+
+        const dosenData = {
+            ai: [
+                { initials: 'T', name: 'Tursina, S.T.,M.Cs.', nip: '197205102005011002', expertise: 'Machine Learning, Deep Learning', badge_id: 'Lektor Kepala', badge_en: 'Associate Professor' },
+                { initials: 'RH', name: 'Rina Hartati, Ph.D', nip: '197809142009012003', expertise: 'Computer Vision, NLP', badge_id: 'Lektor', badge_en: 'Assistant Professor' },
+                { initials: 'MT', name: 'Dr. M. Taufik, M.T', nip: '197403062000031001', expertise: 'Algoritma Optimasi, AI', badge_id: 'Guru Besar', badge_en: 'Professor' },
+                { initials: 'YR', name: 'Yusuf Rizky, M.Kom', nip: '198811072015041001', expertise: 'Data Mining, Fuzzy Logic', badge_id: 'Lektor', badge_en: 'Assistant Professor' }
+            ],
+            rpl: [
+                { initials: 'HA', name: 'H. Hengky Anra, S.T., M.Kom.', nip: '197602142003121001', expertise: 'Software Testing, DevOps', badge_id: 'Lektor Kepala', badge_en: 'Associate Professor' },
+                { initials: 'PN', name: 'Putri Nabila, M.Kom', nip: '199005132017042001', expertise: 'UX Research, Agile', badge_id: 'Asisten Ahli', badge_en: 'Junior Lecturer' },
+                { initials: 'YS', name: 'Dr. Yudha Santosa, M.T', nip: '197801152003121002', expertise: 'Cloud Engineering, SRE', badge_id: 'Lektor', badge_en: 'Assistant Professor' },
+                { initials: 'BW', name: 'Bayu Wicaksono, M.Kom', nip: '198706122015041002', expertise: 'Mobile Dev, React Native', badge_id: 'Asisten Ahli', badge_en: 'Junior Lecturer' }
+            ],
+            net: [
+                { initials: 'HP', name: 'Heri Priyanto, S.T., M.T.', nip: '197604212003121001', expertise: 'Network Security, Cloud', badge_id: 'Guru Besar', badge_en: 'Professor' },
+                { initials: 'SA', name: 'Siti Aisyah, M.Kom', nip: '198912082016042001', expertise: 'Cybersecurity, Forensik', badge_id: 'Lektor', badge_en: 'Assistant Professor' },
+                { initials: 'BK', name: 'Budi Kurniawan, M.T', nip: '198204062009121001', expertise: 'IoT, Wireless Sensor', badge_id: 'Lektor', badge_en: 'Assistant Professor' },
+                { initials: 'HM', name: 'Hamid Maulana, M.T', nip: '198507162012121001', expertise: 'Network Admin, SDN', badge_id: 'Asisten Ahli', badge_en: 'Junior Lecturer' }
+            ],
+            si: [
+                { initials: 'YS', name: 'Dr. Ir. Yus Sholva, S.T., M.T.', nip: '197809252004012001', expertise: 'GIS, Geospatial Analytics', badge_id: 'Lektor Kepala', badge_en: 'Associate Professor' },
+                { initials: 'FN', name: 'Fadli Nugraha, M.Sc', nip: '198512072012121001', expertise: 'Data Science, BI', badge_id: 'Lektor', badge_en: 'Assistant Professor' },
+                { initials: 'TH', name: 'Dr. Tria Hastuti, M.T', nip: '197711132003122001', expertise: 'E-Government, MIS', badge_id: 'Guru Besar', badge_en: 'Professor' },
+                { initials: 'KS', name: 'Krisna Santoso, M.Kom', nip: '199201212018031001', expertise: 'Big Data, ETL', badge_id: 'Asisten Ahli', badge_en: 'Junior Lecturer' }
+            ]
+        };
+
+        const kbkMeta = {
+            ai: {
+                label_id: 'Kecerdasan Buatan',
+                label_en: 'Artificial Intelligence',
+                accent: 'from-sky-500/15 to-cyan-400/10',
+                icon: 'fa-solid fa-brain',
+                insightBadge_id: 'KBK Insight',
+                insightBadge_en: 'KBK Insight',
+                insightDesc_id: 'KBK ini berfokus pada pengembangan sistem cerdas yang mampu memahami pola, bahasa, citra, dan pengambilan keputusan adaptif.',
+                insightDesc_en: 'This group focuses on intelligent systems that can understand patterns, language, images, and adaptive decision making.',
+                focus_id: 'Eksplorasi machine learning, deep learning, NLP, dan computer vision untuk menjawab problem nyata lintas sektor.',
+                focus_en: 'Explores machine learning, deep learning, NLP, and computer vision to address practical cross-sector problems.',
+                output_id: 'Luaran utama berupa model prediktif, prototipe sistem cerdas, dataset terkurasi, dan publikasi berbasis eksperimen.',
+                output_en: 'Primary outputs include predictive models, intelligent system prototypes, curated datasets, and experiment-driven publications.',
+                collab_id: 'Cocok untuk kolaborasi pada analitik data, otomasi proses, klasifikasi citra, dan pengolahan bahasa Indonesia.',
+                collab_en: 'Suitable for collaborations in data analytics, process automation, image classification, and Indonesian language processing.',
+                topics: ['Vision', 'NLP', 'Deep Learning', 'Data Mining']
+            },
+            rpl: {
+                label_id: 'Rekayasa PL',
+                label_en: 'Software Engineering',
+                accent: 'from-amber-400/20 to-orange-400/10',
+                icon: 'fa-solid fa-code',
+                insightBadge_id: 'KBK Insight',
+                insightBadge_en: 'KBK Insight',
+                insightDesc_id: 'KBK ini menggarap proses rekayasa perangkat lunak dari perancangan, implementasi, pengujian, hingga keberlanjutan sistem.',
+                insightDesc_en: 'This group works across the full software engineering lifecycle from design and implementation to testing and system sustainability.',
+                focus_id: 'Fokus pada arsitektur modern, kualitas perangkat lunak, DevOps, pengujian, serta pengalaman pengguna yang terukur.',
+                focus_en: 'Focuses on modern architecture, software quality, DevOps, testing, and measurable user experience.',
+                output_id: 'Luaran berupa aplikasi siap pakai, pipeline CI/CD, framework pengujian, dokumentasi teknis, dan studi evaluasi kualitas.',
+                output_en: 'Outputs include production-ready applications, CI/CD pipelines, testing frameworks, technical documentation, and quality evaluation studies.',
+                collab_id: 'Relevan untuk pengembangan platform digital, audit kualitas aplikasi, transformasi proses bisnis, dan modernisasi sistem lama.',
+                collab_en: 'Relevant for digital platform development, application quality audits, business process transformation, and legacy modernization.',
+                topics: ['DevOps', 'Agile', 'Testing', 'Architecture']
+            },
+            net: {
+                label_id: 'Jaringan & Keamanan',
+                label_en: 'Network & Security',
+                accent: 'from-emerald-500/15 to-teal-400/10',
+                icon: 'fa-solid fa-shield-halved',
+                insightBadge_id: 'KBK Insight',
+                insightBadge_en: 'KBK Insight',
+                insightDesc_id: 'KBK ini menitikberatkan pada infrastruktur jaringan yang tangguh, aman, dan siap mendukung layanan digital berskala besar.',
+                insightDesc_en: 'This group emphasizes resilient, secure network infrastructure ready to support large-scale digital services.',
+                focus_id: 'Riset mencakup keamanan siber, cloud, IoT, monitoring jaringan, forensik digital, dan desain arsitektur terpercaya.',
+                focus_en: 'Research spans cybersecurity, cloud, IoT, network monitoring, digital forensics, and trusted architecture design.',
+                output_id: 'Luaran berupa rancangan arsitektur, sistem monitoring, simulasi keamanan, dashboard operasional, dan rekomendasi mitigasi risiko.',
+                output_en: 'Outputs include architecture blueprints, monitoring systems, security simulations, operational dashboards, and risk mitigation recommendations.',
+                collab_id: 'Tepat untuk kerja sama pada audit keamanan, monitoring infrastruktur, smart device, dan penerapan zero trust.',
+                collab_en: 'Well suited for partnerships in security audits, infrastructure monitoring, smart devices, and zero-trust adoption.',
+                topics: ['Cybersec', 'IoT', 'Cloud', 'Forensics']
+            },
+            si: {
+                label_id: 'Sistem Informasi',
+                label_en: 'Information Systems',
+                accent: 'from-indigo-500/15 to-blue-400/10',
+                icon: 'fa-solid fa-database',
+                insightBadge_id: 'KBK Insight',
+                insightBadge_en: 'KBK Insight',
+                insightDesc_id: 'KBK ini membangun solusi berbasis data untuk mendukung pengambilan keputusan, tata kelola informasi, dan pemetaan kebutuhan organisasi.',
+                insightDesc_en: 'This group builds data-driven solutions to support decision making, information governance, and organizational needs mapping.',
+                focus_id: 'Topik utama mencakup business intelligence, GIS, big data, data warehouse, dan sistem pendukung keputusan.',
+                focus_en: 'Its main topics include business intelligence, GIS, big data, data warehousing, and decision support systems.',
+                output_id: 'Luaran berupa dashboard analitik, model pelaporan, sistem berbasis geospasial, serta integrasi data untuk kebutuhan strategis.',
+                output_en: 'Outputs include analytics dashboards, reporting models, geospatial systems, and data integration for strategic needs.',
+                collab_id: 'Sangat relevan untuk proyek tata kelola data, pemetaan wilayah, evaluasi kebijakan, dan insight operasional lembaga.',
+                collab_en: 'Highly relevant for data governance projects, regional mapping, policy evaluation, and institutional operational insights.',
+                topics: ['Big Data', 'GIS', 'BI', 'Decision Support']
+            }
+        };
+
+        const translations = {
+            id: {
+                info: 'INFO TERBARU',
+                tickerItem1: 'Selamat datang di antarmuka situs web Informatika terbaru!',
+                tickerItem2: 'Pendaftaran kolaborasi riset semester genap telah dibuka.',
+                tickerItem3: 'Pantau publikasi dosen dan mahasiswa secara real-time.',
+                home: 'BERANDA',
+                pageTitle: 'RISET & KBK',
+                badgeHero: 'Riset & Kelompok Bidang Keahlian',
+                heroTitle: 'Riset & Kelompok Bidang Keahlian',
+                heroDesc: 'Kenali Kelompok Bidang Keahlian (KBK) kami. Jelajahi riset unggulan dosen dan mahasiswa di bidang Kecerdasan Buatan (AI), Rekayasa Perangkat Lunak, hingga IoT',
+                quickActionKbk: 'Jelajahi KBK',
+                quickActionRiset: 'Cari Publikasi',
+                kbkTitle: '4 Pilar Keilmuan Informatika UNTAN',
+                kbkDesc: 'Setiap KBK berfokus pada topik riset spesifik, dipimpin dosen berpengalaman.',
+                kbkLeadLabel: 'Dipimpin oleh',
+                kbkFocusLabel: 'Arah Riset',
+                kbkOutputLabel: 'Luaran Utama',
+                kbkCollabLabel: 'Peluang Kolaborasi',
+                kbkTopicLabel: 'Topik Kunci',
+                statsPub: 'Publikasi Terindeks',
+                statsHibah: 'Hibah Riset Aktif',
+                statsDosen: 'Dosen Peneliti',
+                statsKolaborasi: 'Kolaborasi Industri',
+                risetTitle: 'Publikasi & Penelitian Terkini',
+                searchLabel: 'Cari publikasi',
+                searchPlaceholder: 'Cari judul, penulis, atau venue...',
+                noResultTitle: 'Tidak ada publikasi yang cocok',
+                noResultDesc: 'Coba kata kunci lain atau ganti filter KBK.',
+                filterAll: 'Semua',
+                filterAI: 'Kecerdasan Buatan',
+                filterRPL: 'Rekayasa PL',
+                filterNet: 'Jaringan & Keamanan',
+                filterSI: 'Sistem Informasi',
+                dosenTitle: 'Peneliti & Dosen per Kelompok Keahlian',
+                dosenLeadDesc: 'Bagian ini menampilkan ketua setiap KBK. Pilih kartu untuk melihat dosen lain di kelompok keahlian tersebut.',
+                kbkLeader: 'Ketua KBK',
+                viewMembers: 'Lihat dosen lainnya',
+                labTitle: 'Laboratorium Pendukung Riset',
+                ctaTitle: 'Tertarik Berkolaborasi dengan KBK Kami?',
+                ctaDesc: 'Kami terbuka untuk kolaborasi riset, kemitraan industri, maupun skripsi bersama dosen ahli kami.',
+                ctaBtn: 'Hubungi Kami',
+                viewAll: 'Lihat Semua',
+                facultyDirectory: 'Direktori Dosen',
+                expertise: 'Keahlian'
+            },
+            en: {
+                info: 'LATEST INFO',
+                tickerItem1: 'Welcome to the new Informatics website interface!',
+                tickerItem2: 'Research collaboration registration for this semester is open.',
+                tickerItem3: 'Track faculty and student publications in one place.',
+                home: 'HOME',
+                pageTitle: 'RESEARCH & KBK',
+                badgeHero: 'Research & Research Groups',
+                heroTitle: 'Research & Research Groups',
+                heroDesc: 'Get to know our Research Groups (KBK). Explore leading research by faculty and students in the fields of AI, Software Engineering, and IoT.',
+                quickActionKbk: 'Explore KBK',
+                quickActionRiset: 'Search Publications',
+                kbkTitle: '4 Pillars of Informatics Science at UNTAN',
+                kbkDesc: 'Each group focuses on specific research topics, led by experienced faculty.',
+                kbkLeadLabel: 'Led by',
+                kbkFocusLabel: 'Research Direction',
+                kbkOutputLabel: 'Primary Outputs',
+                kbkCollabLabel: 'Collaboration Potential',
+                kbkTopicLabel: 'Key Topics',
+                statsPub: 'Indexed Publications',
+                statsHibah: 'Active Research Grants',
+                statsDosen: 'Research Faculty',
+                statsKolaborasi: 'Industry Collaboration',
+                risetTitle: 'Latest Publications & Research',
+                searchLabel: 'Search publications',
+                searchPlaceholder: 'Search by title, author, or venue...',
+                noResultTitle: 'No matching publications found',
+                noResultDesc: 'Try another keyword or switch KBK filter.',
+                filterAll: 'All',
+                filterAI: 'Artificial Intelligence',
+                filterRPL: 'Software Engineering',
+                filterNet: 'Network & Security',
+                filterSI: 'Information Systems',
+                dosenTitle: 'Faculty & Researchers by Research Group',
+                dosenLeadDesc: 'This section shows the head of each research group. Open a card to view the other faculty members in that group.',
+                kbkLeader: 'Head of KBK',
+                viewMembers: 'View other faculty',
+                labTitle: 'Research Support Laboratories',
+                ctaTitle: 'Interested in Collaborating with Us?',
+                ctaDesc: 'We are open to research collaborations, industry partnerships, or thesis projects with our experts.',
+                ctaBtn: 'Contact Us',
+                viewAll: 'View All',
+                facultyDirectory: 'Faculty Directory',
+                expertise: 'Expertise'
+            }
+        };
+
+        let currentLang = 'id';
+        let currentFilter = 'all';
+        let currentQuery = '';
+        let currentKbkInsight = 'ai';
+        let isLoadingData = true;
+        let displayLimit = 9; // Default limit
+
+
+        const KBK_KEYWORDS = {
+            ai: ['kecerdasan', 'artificial', 'intelligence', 'neural', 'cnn', 'rnn', 'deep', 'machine', 'vision', 'nlp', 'genetika', 'optimasi', 'mining', 'pakar', 'heurisitik'],
+            rpl: ['perangkat lunak', 'software', 'microservices', 'devops', 'testing', 'agile', 'scrum', 'framework', 'ux', 'mobile', 'react', 'kualitas', 'arsitektur', 'pemrograman'],
+            net: ['jaringan', 'network', 'cloud', 'iot', 'internet', 'things', 'security', 'keamanan', 'cyber', 'zero trust', 'wireless', 'sensor', 'routing', 'switching'],
+            si: ['sistem informasi', 'information systems', 'gis', 'geospatial', 'big data', 'bi', 'business', 'warehouse', 'mis', 'government', 'spk', 'keputusan', 'tata kelola']
+        };
+
+        function categorizeByKeywords(title) {
+            const lowTitle = title.toLowerCase();
+            for (const [kbk, keywords] of Object.entries(KBK_KEYWORDS)) {
+                if (keywords.some(k => lowTitle.includes(k))) return kbk;
+            }
+            return 'si'; // Default to SI if no match
+        }
+
+        function logAppError(scope, error, extra = {}) {
+            console.error(`[${scope}]`, error, extra);
+        }
+
+        function getDashboardErrorMessage(error) {
+            if (!error) return 'Terjadi kendala yang tidak diketahui saat memuat data.';
+            if (error.name === 'AbortError') return 'Koneksi ke dashboard terlalu lambat (timeout).';
+            if (error.message === 'INVALID_CONFIG') return 'Konfigurasi API belum lengkap. Periksa file .env dan jalankan lewat server lokal.';
+            if (error.message === 'INVALID_RESPONSE') return 'Respons dari proxy tidak valid dan tidak bisa diproses.';
+            if (error.message === 'EMPTY_RESPONSE') return 'Dashboard mengembalikan data kosong atau struktur halaman berubah.';
+            if (error.message === 'NO_ROWS_FOUND') return 'Data penelitian tidak ditemukan pada halaman dashboard.';
+            if (error.message?.startsWith('HTTP_ERROR_')) return `Proxy merespons gagal (${error.message.replace('HTTP_ERROR_', 'HTTP ')}).`;
+            return 'Gagal mengambil data. Server dashboard mungkin sedang sibuk atau memblokir akses.';
+        }
+
+        function renderRisetFeedback(title, message, buttonLabel = '', buttonAction = '') {
+            const grid = document.getElementById('riset-grid');
+            if (!grid) return;
+
+            const actionHtml = buttonLabel && buttonAction
+                ? `<button onclick="${buttonAction}" class="px-6 py-2 bg-red-500 text-white rounded-xl font-bold text-sm hover:bg-red-600 transition-colors">${buttonLabel}</button>`
+                : '';
+
+            grid.innerHTML = `
+                <div class="md:col-span-2 lg:col-span-3 bg-red-50 border border-red-100 rounded-3xl p-12 text-center">
+                    <div class="w-14 h-14 rounded-2xl bg-white text-red-500 mx-auto mb-4 flex items-center justify-center shadow-soft">
+                        <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-red-900 mb-2">${title}</h3>
+                    <p class="text-red-700 text-sm mb-4">${message}</p>
+                    ${actionHtml}
+                </div>
+            `;
+        }
+
+        function extractDashboardHtml(responseData) {
+            if (!responseData || !responseData.trim()) {
+                throw new Error('EMPTY_RESPONSE');
+            }
+
+            if (!responseData.trim().startsWith('{')) {
+                return responseData;
+            }
+
+            try {
+                const json = JSON.parse(responseData);
+                if (typeof json.contents === 'string' && json.contents.trim()) {
+                    return json.contents;
+                }
+            } catch (error) {
+                throw new Error('INVALID_RESPONSE');
+            }
+
+            throw new Error('INVALID_RESPONSE');
+        }
+
+        function parseDashboardRows(html) {
+            if (!html || html.length < 500) {
+                throw new Error('EMPTY_RESPONSE');
+            }
+
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const rows = doc.querySelectorAll('table tbody tr');
+            if (!rows.length) {
+                throw new Error('NO_ROWS_FOUND');
+            }
+
+            return rows;
+        }
+
+        async function fetchDashboardData() {
+            const grid = document.getElementById('riset-grid');
+            if (grid) {
+                grid.innerHTML = `
+                    <div class="md:col-span-2 lg:col-span-3 py-20 text-center">
+                        <div class="inline-block animate-spin w-10 h-10 border-4 border-untan-blue border-t-transparent rounded-full mb-4"></div>
+                        <p class="text-slate-500 font-bold">Mengambil data dari Dashboard...</p>
+                    </div>
+                `;
+            }
+
+            const targetUrl = window.APP_CONFIG?.dashboardTargetUrl?.trim();
+            const proxyTemplates = Array.isArray(window.APP_CONFIG?.dashboardProxyTemplates)
+                ? window.APP_CONFIG.dashboardProxyTemplates.filter(Boolean)
+                : [];
+
+            if (!targetUrl || !proxyTemplates.length) {
+                const configError = new Error('INVALID_CONFIG');
+                logAppError('fetchDashboardData', configError, { targetUrl, proxyTemplates });
+                renderRisetFeedback('Konfigurasi Belum Siap', getDashboardErrorMessage(configError));
+                return;
+            }
+
+            const proxyServers = proxyTemplates.map((template) => {
+                return (url) => template
+                    .replaceAll('{{url}}', encodeURIComponent(url))
+                    .replaceAll('{{rawUrl}}', url)
+                    .replaceAll('{{ts}}', String(Date.now()));
+            });
+
+            let lastError = null;
+
+            for (const getProxyUrl of proxyServers) {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+                try {
+                    const proxyUrl = getProxyUrl(targetUrl);
+                    console.log(`Trying proxy: ${proxyUrl}`);
+
+                    const response = await fetch(proxyUrl, { signal: controller.signal });
+                    clearTimeout(timeoutId);
+
+                    if (!response.ok) throw new Error(`HTTP_ERROR_${response.status}`);
+
+                    const responseData = await response.text();
+                    const html = extractDashboardHtml(responseData);
+                    const rows = parseDashboardRows(html);
+
+                    const newData = [];
+                    rows.forEach((row, index) => {
+                        const cols = row.querySelectorAll('td');
+                        if (cols.length >= 3) {
+                            const indexVal = cols[0].innerText.trim();
+
+                            // Mencari elemen judul (biasanya di dalam <a> atau <b>)
+                            const linkEl = cols[1].querySelector('a');
+                            const titleEl = linkEl || cols[1].querySelector('b') || cols[1];
+                            const url = linkEl ? linkEl.getAttribute('href') : '#';
+                            const title = titleEl.innerText.trim();
+
+                            // Skip jika baris ini adalah header atau bukan data penelitian (berdasarkan index atau judul)
+                            if (isNaN(parseInt(indexVal)) || title === "Bidang Riset" || title === "Thn Jlh") {
+                                return;
+                            }
+
+                            // Mencari elemen penulis (biasanya di dalam tag <font> dengan size 11px)
+                            const authorsEl = cols[1].querySelector('font');
+                            const authors = authorsEl ? authorsEl.innerText.trim() : 'Peneliti Informatika';
+
+                            // Tahun biasanya ada di kolom berikutnya
+                            const year = cols[2]?.innerText.trim() || '2025';
+
+                            const kbk = categorizeByKeywords(title);
+                            const kbkInfo = kbkMeta[kbk];
+
+                            newData.push({
+                                id: parseInt(indexVal) || (newData.length + 1),
+                                kbk: kbk,
+                                title_id: title,
+                                title_en: title,
+                                authors: authors,
+                                year: year,
+                                url: url,
+                                venue: 'Dashboard Informatika',
+                                badge_id: kbkInfo.label_id,
+                                badge_en: kbkInfo.label_en
+                            });
+                        }
+                    });
+
+                    if (newData.length > 0) {
+                        risetData = newData;
+                        isLoadingData = false;
+                        renderRisetCards();
+                        return; // Berhasil! Keluar dari loop
+                    }
+
+                    throw new Error('NO_ROWS_FOUND');
+                } catch (error) {
+                    clearTimeout(timeoutId);
+                    logAppError('dashboard-proxy', error, { targetUrl });
+                    lastError = error;
+                    // Lanjut ke proxy berikutnya...
+                }
+            }
+
+            // Jika semua proxy gagal
+            logAppError('fetchDashboardData', lastError);
+            renderRisetFeedback('Pemuatan Data Gagal', getDashboardErrorMessage(lastError), 'Coba Lagi', 'fetchDashboardData()');
+        }
+
+
+        function updateLangButton() {
+            const desktopButton = document.getElementById('lang-toggle-btn');
+            if (desktopButton) {
+                desktopButton.innerHTML = currentLang === 'id'
+                    ? '<span class="font-bold text-white">ID</span> <span class="text-white/40 mx-2">|</span> <span class="font-normal text-white">EN</span>'
+                    : '<span class="font-normal text-white">ID</span> <span class="text-white/40 mx-2">|</span> <span class="font-bold text-white">EN</span>';
+            }
+
+            const mobileButton = document.getElementById('mobile-lang-toggle-btn');
+            if (mobileButton) {
+                mobileButton.textContent = currentLang === 'id' ? 'Bahasa: ID' : 'Language: EN';
+            }
+        }
+
+        function applyTranslation(lang) {
+            document.querySelectorAll('[data-i18n]').forEach((element) => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.innerText = translations[lang][key];
+                }
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach((element) => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) {
+                    element.setAttribute('placeholder', translations[lang][key]);
+                }
+            });
+        }
+
+        function matchesQuery(item, query) {
+            const haystack = [item.title_id, item.title_en, item.authors, item.venue, item.year].join(' ').toLowerCase();
+            return haystack.includes(query);
+        }
+
+        function renderRisetCards() {
+            const grid = document.getElementById('riset-grid');
+            if (!grid) return;
+
+            try {
+                const normalizedQuery = currentQuery.trim().toLowerCase();
+                const filteredByCategory = currentFilter === 'all' ? risetData : risetData.filter((item) => item.kbk === currentFilter);
+                const filteredItems = normalizedQuery ? filteredByCategory.filter((item) => matchesQuery(item, normalizedQuery)) : filteredByCategory;
+
+                // Terapkan limit tampilan
+                const itemsToShow = filteredItems.slice(0, displayLimit);
+
+                // Update info jumlah data yang ditampilkan
+                const countInfo = document.getElementById('riset-count-info');
+                if (countInfo) {
+                    countInfo.innerText = `Menampilkan ${itemsToShow.length} dari ${filteredItems.length} publikasi`;
+                }
+
+                // Tampilkan/Sembunyikan tombol "Lihat Semua" berdasarkan sisa data
+                const viewAllSection = document.getElementById('view-all-section');
+                if (viewAllSection) {
+                    viewAllSection.style.display = filteredItems.length > displayLimit ? 'block' : 'none';
+                }
+
+                if (!itemsToShow.length) {
+                    grid.innerHTML = `
+                        <div class="md:col-span-2 lg:col-span-3 bg-slate-50 border border-slate-100 rounded-3xl p-12 text-center">
+                            <div class="w-14 h-14 rounded-2xl bg-white text-untan-navy mx-auto mb-4 flex items-center justify-center shadow-soft">
+                                <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-untan-navy mb-2">${translations[currentLang].noResultTitle}</h3>
+                            <p class="text-slate-500 text-sm">${translations[currentLang].noResultDesc}</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                grid.innerHTML = itemsToShow.map((item) => `
+                    <a href="${item.url}" target="_blank" class="bg-white rounded-3xl p-8 shadow-soft border border-gray-100 flex flex-col h-full hover:shadow-soft-lg hover:border-untan-yellow transition-all duration-500 group">
+                        <div class="mb-6">
+                            <span class="bg-untan-blue/5 text-untan-blue text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-wider border border-untan-blue/10">${currentLang === 'id' ? item.badge_id : item.badge_en}</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-untan-navy mb-4 leading-snug line-clamp-3 group-hover:text-untan-blue transition-colors">${currentLang === 'id' ? item.title_id : item.title_en}</h3>
+                        <p class="text-gray-500 text-xs mb-1 italic">${item.authors}</p>
+                        <p class="text-gray-400 text-[10px] font-mono mb-8">${item.year}</p>
+                        <div class="mt-auto pt-6 border-t border-gray-50 flex justify-between items-center text-slate-400">
+                            <span class="text-[11px] font-medium line-clamp-1 italic">${item.venue}</span>
+                            <i class="fa-regular fa-file-lines group-hover:text-untan-yellow transition-colors"></i>
+                        </div>
+                    </a>
+                `).join('');
+            } catch (error) {
+                logAppError('renderRisetCards', error);
+                renderRisetFeedback('Tampilan Publikasi Bermasalah', 'Terjadi kesalahan saat menampilkan daftar publikasi.', 'Muat Ulang Data', 'fetchDashboardData()');
+            }
+        }
+
+        function renderDosenCards() {
+            const grid = document.getElementById('dosen-grid');
+            if (!grid) return;
+            grid.innerHTML = Object.entries(dosenData).map(([kbk, members]) => {
+                const leader = members[0];
+                const meta = kbkMeta[kbk];
+                const label = currentLang === 'id' ? meta.label_id : meta.label_en;
+                const rank = currentLang === 'id' ? leader.badge_id : leader.badge_en;
+
+                return `
+                    <a href="dosen_kbk.html?kbk=${kbk}&lang=${currentLang}" class="group block rounded-[2rem] overflow-hidden border border-slate-100 bg-white shadow-soft hover:-translate-y-2 hover:shadow-soft-lg transition-all duration-500">
+                        <div class="p-8 bg-gradient-to-br ${meta.accent} border-b border-slate-100">
+                            <div class="flex items-start justify-between gap-4 mb-8">
+                                <div>
+                                    <span class="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.28em] text-untan-blue/80">
+                                        <i class="${meta.icon}"></i>
+                                        ${label}
+                                    </span>
+                                    <p class="mt-3 text-xs font-bold uppercase tracking-[0.24em] text-slate-400">${translations[currentLang].kbkLeader}</p>
+                                </div>
+                                <div class="w-16 h-16 rounded-2xl bg-untan-navy flex items-center justify-center text-white font-bold text-2xl shadow-soft">${leader.initials}</div>
+                            </div>
+                            <h4 class="text-lg font-bold text-untan-navy leading-snug">${leader.name}</h4>
+                            <p class="mt-2 text-[11px] font-mono text-slate-400">NIP ${leader.nip}</p>
+                        </div>
+                        <div class="p-8">
+                            <p class="text-sm text-slate-500 leading-relaxed min-h-[72px]">${translations[currentLang].expertise}: ${leader.expertise}</p>
+                            <div class="mt-6 flex items-center justify-between gap-4">
+                                <span class="inline-flex items-center rounded-full bg-slate-50 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 border border-slate-100">${rank}</span>
+                                <span class="inline-flex items-center gap-2 text-sm font-bold text-untan-navy group-hover:text-untan-blue transition-colors">
+                                    ${translations[currentLang].viewMembers}
+                                    <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        function renderKbkInsight() {
+            const meta = kbkMeta[currentKbkInsight];
+            const leader = dosenData[currentKbkInsight][0];
+            if (!meta || !leader) return;
+
+            const title = currentLang === 'id' ? meta.label_id : meta.label_en;
+            const badge = currentLang === 'id' ? meta.insightBadge_id : meta.insightBadge_en;
+            const desc = currentLang === 'id' ? meta.insightDesc_id : meta.insightDesc_en;
+            const focus = currentLang === 'id' ? meta.focus_id : meta.focus_en;
+            const output = currentLang === 'id' ? meta.output_id : meta.output_en;
+            const collab = currentLang === 'id' ? meta.collab_id : meta.collab_en;
+            const rank = currentLang === 'id' ? leader.badge_id : leader.badge_en;
+
+            const badgeEl = document.getElementById('kbk-insight-badge');
+            const iconEl = document.getElementById('kbk-insight-icon');
+            const titleEl = document.getElementById('kbk-insight-title');
+            const descEl = document.getElementById('kbk-insight-desc');
+            const leadLabelEl = document.getElementById('kbk-insight-lead-label');
+            const leadInitialsEl = document.getElementById('kbk-insight-lead-initials');
+            const leadNameEl = document.getElementById('kbk-insight-lead-name');
+            const leadRankEl = document.getElementById('kbk-insight-lead-rank');
+            const focusLabelEl = document.getElementById('kbk-focus-label');
+            const focusTextEl = document.getElementById('kbk-focus-text');
+            const outputLabelEl = document.getElementById('kbk-output-label');
+            const outputTextEl = document.getElementById('kbk-output-text');
+            const collabLabelEl = document.getElementById('kbk-collab-label');
+            const collabTextEl = document.getElementById('kbk-collab-text');
+            const topicLabelEl = document.getElementById('kbk-topic-label');
+            const topicTagsEl = document.getElementById('kbk-topic-tags');
+            const heroEl = document.getElementById('kbk-insight-hero');
+
+            if (!badgeEl || !iconEl || !titleEl || !descEl || !leadLabelEl || !leadInitialsEl || !leadNameEl || !leadRankEl || !focusLabelEl || !focusTextEl || !outputLabelEl || !outputTextEl || !collabLabelEl || !collabTextEl || !topicLabelEl || !topicTagsEl || !heroEl) return;
+
+            heroEl.className = `p-8 lg:p-10 border-b lg:border-b-0 lg:border-r border-slate-100 bg-gradient-to-br ${meta.accent}`;
+            iconEl.className = meta.icon;
+            badgeEl.textContent = badge;
+            titleEl.textContent = title;
+            descEl.textContent = desc;
+            leadLabelEl.textContent = translations[currentLang].kbkLeadLabel;
+            leadInitialsEl.textContent = leader.initials;
+            leadNameEl.textContent = leader.name;
+            leadRankEl.textContent = rank;
+            focusLabelEl.textContent = translations[currentLang].kbkFocusLabel;
+            focusTextEl.textContent = focus;
+            outputLabelEl.textContent = translations[currentLang].kbkOutputLabel;
+            outputTextEl.textContent = output;
+            collabLabelEl.textContent = translations[currentLang].kbkCollabLabel;
+            collabTextEl.textContent = collab;
+            topicLabelEl.textContent = translations[currentLang].kbkTopicLabel;
+            topicTagsEl.innerHTML = meta.topics.map((topic) => `
+                <span class="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-[11px] font-bold text-slate-500">${topic}</span>
+            `).join('');
+
+            document.querySelectorAll('[data-kbk-card]').forEach((card) => {
+                const active = card.getAttribute('data-kbk-card') === currentKbkInsight;
+                card.classList.toggle('border-untan-yellow', active);
+                card.classList.toggle('ring-2', active);
+                card.classList.toggle('ring-untan-blue/10', active);
+            });
+        }
+
+        window.openKbkInsight = function (kbk, shouldScroll = true) {
+            if (!kbkMeta[kbk]) return;
+            currentKbkInsight = kbk;
+            renderKbkInsight();
+
+            if (shouldScroll) {
+                const section = document.getElementById('kbk-insight-section');
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        };
+
+        window.searchRiset = function (query) {
+            currentQuery = String(query || '').trim().toLowerCase();
+            const clearButton = document.getElementById('clear-riset-search');
+            if (clearButton) {
+                clearButton.classList.toggle('hidden', currentQuery.length === 0);
+            }
+            renderRisetCards();
+        };
+
+        window.filterRiset = function (category) {
+            currentFilter = category;
+            displayLimit = 9; // Reset limit saat ganti filter
+            document.querySelectorAll('.filter-btn').forEach((button) => {
+                const active = button.getAttribute('data-filter') === category;
+                button.className = `filter-btn px-5 py-2.5 rounded-lg font-bold text-[11px] uppercase tracking-wider transition-all ${active ? 'bg-untan-navy text-white shadow-soft' : 'text-slate-400 hover:bg-slate-100 hover:text-untan-navy'}`;
+            });
+            renderRisetCards();
+        };
+
+        window.setLimit = function (limit) {
+            displayLimit = limit;
+            renderRisetCards();
+
+            // Highlight active limit button
+            document.querySelectorAll('.limit-btn').forEach(btn => {
+                const isActive = parseInt(btn.getAttribute('data-limit')) === limit;
+                btn.className = `limit-btn px-4 py-2 rounded-xl text-[11px] font-bold transition-all ${isActive ? 'bg-untan-navy text-white shadow-soft' : 'bg-white text-slate-500 border border-slate-200 hover:bg-slate-50'}`;
+            });
+        };
+
+        function toggleMobileMenu(forceState) {
+            const menu = document.getElementById('mobile-menu');
+            const button = document.getElementById('mobile-menu-btn');
+            if (!menu || !button) return;
+
+            const shouldOpen = typeof forceState === 'boolean' ? forceState : menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', !shouldOpen);
+            button.setAttribute('aria-expanded', String(shouldOpen));
+        }
+
+        function setupMobileMenu() {
+            const button = document.getElementById('mobile-menu-btn');
+            if (!button) return;
+
+            button.addEventListener('click', () => toggleMobileMenu());
+            document.querySelectorAll('.mobile-menu-link').forEach((link) => {
+                link.addEventListener('click', () => toggleMobileMenu(false));
+            });
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1024) {
+                    toggleMobileMenu(false);
+                }
+            });
+        }
+
+        function setupScrollUI() {
+            const backToTop = document.getElementById('back-to-top');
+
+            const updateScroll = () => {
+                if (backToTop) {
+                    backToTop.classList.toggle('show', window.scrollY > 420);
+                }
+            };
+
+            window.addEventListener('scroll', updateScroll, { passive: true });
+            updateScroll();
+
+            if (backToTop) {
+                backToTop.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        }
+
+        function setupRevealAnimations() {
+            const revealElements = document.querySelectorAll('.reveal');
+            if (!revealElements.length) return;
+            document.body.classList.add('reveal-ready');
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                revealElements.forEach((element) => element.classList.add('is-visible'));
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                });
+            }, { threshold: 0.12 });
+
+            revealElements.forEach((element) => observer.observe(element));
+        }
+
+        window.setLanguage = function (lang) {
+            currentLang = lang;
+            updateLangButton();
+            applyTranslation(lang);
+            renderKbkInsight();
+            renderRisetCards();
+            renderDosenCards();
+        };
+
+        window.addEventListener('error', (event) => {
+            logAppError('window-error', event.error || new Error(event.message));
+        });
+
+        window.addEventListener('unhandledrejection', (event) => {
+            logAppError('unhandledrejection', event.reason instanceof Error ? event.reason : new Error(String(event.reason)));
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                setupMobileMenu();
+                setupScrollUI();
+                setupRevealAnimations();
+                setLanguage(currentLang);
+                openKbkInsight(currentKbkInsight, false);
+                filterRiset(currentFilter);
+                searchRiset('');
+                fetchDashboardData().catch((error) => {
+                    logAppError('DOMContentLoaded.fetchDashboardData', error);
+                    renderRisetFeedback('Pemuatan Data Gagal', getDashboardErrorMessage(error), 'Coba Lagi', 'fetchDashboardData()');
+                });
+            } catch (error) {
+                logAppError('DOMContentLoaded', error);
+                renderRisetFeedback('Aplikasi Gagal Dimulai', 'Terjadi kesalahan saat inisialisasi halaman. Silakan muat ulang halaman.');
+            }
+        });
+    </script>
+</body>
+
+</html>
