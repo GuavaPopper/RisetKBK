@@ -17,6 +17,13 @@
     <script>
         tailwind.config = {
             theme: {
+                screens: {
+                    'sm': '390px',      // Mobile: 390 x 844
+                    'md': '768px',      // Tablet: 768 x 1024
+                    'lg': '1366px',     // Laptop: 1366 x 768
+                    'xl': '1920px',     // Desktop: 1920 x 1080
+                    '2xl': '1920px'
+                },
                 extend: {
                     fontFamily: {
                         sans: ['Roboto', 'sans-serif'],
@@ -34,6 +41,32 @@
                     boxShadow: {
                         'soft': '0 20px 50px rgba(0, 49, 80, 0.08)',
                         'soft-lg': '0 30px 60px rgba(0, 49, 80, 0.12)',
+                    },
+                    fontSize: {
+                        // Mobile (390px)
+                        'xs-mobile': ['11px', '14px'],
+                        'sm-mobile': ['13px', '16px'],
+                        'base-mobile': ['14px', '20px'],
+                        'lg-mobile': ['16px', '24px'],
+                        'xl-mobile': ['18px', '28px'],
+                        '2xl-mobile': ['22px', '32px'],
+                        '3xl-mobile': ['26px', '36px'],
+                        // Tablet (768px)
+                        'xs-tablet': ['12px', '15px'],
+                        'sm-tablet': ['14px', '18px'],
+                        'base-tablet': ['15px', '22px'],
+                        'lg-tablet': ['18px', '26px'],
+                        'xl-tablet': ['20px', '30px'],
+                        '2xl-tablet': ['24px', '34px'],
+                        '3xl-tablet': ['28px', '38px'],
+                        // Laptop (1366px)
+                        'xs-laptop': ['13px', '16px'],
+                        'sm-laptop': ['14px', '19px'],
+                        'base-laptop': ['16px', '23px'],
+                        'lg-laptop': ['18px', '27px'],
+                        'xl-laptop': ['20px', '31px'],
+                        '2xl-laptop': ['24px', '35px'],
+                        '3xl-laptop': ['30px', '40px'],
                     }
                 }
             }
@@ -184,11 +217,67 @@
                 transition: none;
             }
         }
+
+        /* Custom responsive breakpoints - overriding Tailwind CDN defaults */
+        /* Mobile: 390px and up */
+        @media (min-width: 390px) {
+            body {
+                font-size: 14px;
+            }
+        }
+
+        /* Tablet: 768px and up */
+        @media (min-width: 768px) {
+            #kbk-card-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* Laptop/Desktop: 1024px and up */
+        @media (min-width: 1024px) {
+            nav.bg-\[#feb401\] {
+                display: block !important;
+            }
+
+            #lang-toggle-btn {
+                display: flex !important;
+            }
+
+            .hidden.lg\:flex {
+                display: flex !important;
+            }
+
+            #kbk-card-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
+        /* Desktop: 1366px and up */
+        @media (min-width: 1366px) {
+            #kbk-card-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+
+            #riset-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            #dosen-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
+        /* Extra Large Desktop: 1920px and up */
+        @media (min-width: 1920px) {
+            body {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 
 <body
-    class="bg-gray-50 font-sans text-gray-800 antialiased selection:bg-untan-yellow selection:text-untan-navy pt-[140px] lg:pt-[180px]">
+    class="bg-gray-50 font-sans text-gray-800 antialiased selection:bg-untan-yellow selection:text-untan-navy pt-[100px] sm:pt-[110px] md:pt-[140px] lg:pt-[160px] xl:pt-[180px]">
 
     <!-- Skip Link -->
     <a href="#main-content" class="skip-link">Langsung ke Konten Utama</a>
@@ -262,77 +351,77 @@
 
         <!-- Yellow Menu Bar (Seperti Gambar 1) -->
         <nav class="bg-[#feb401] hidden lg:block relative w-full shadow-sm z-20">
-            <div class="w-full px-4 lg:px-8 flex justify-center items-center py-3.5 gap-10">
+            <div class="w-full px-4 lg:px-6 xl:px-8 flex justify-center items-center py-3 lg:py-3.5 xl:py-3.5 gap-6 sm:gap-8 md:gap-9 lg:gap-9 xl:gap-10">
                 <button
-                    class="flex items-center gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[14px] uppercase tracking-wide transition-colors">
-                    TENTANG KAMI <i class="fas fa-chevron-down text-[9px] opacity-80 pt-0.5"></i>
+                    class="flex items-center gap-1 lg:gap-1.5 xl:gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[12px] lg:text-[13px] xl:text-[14px] uppercase tracking-wide transition-colors">
+                    TENTANG KAMI <i class="fas fa-chevron-down text-[8px] opacity-80 pt-0.5"></i>
                 </button>
                 <button
-                    class="flex items-center gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[14px] uppercase tracking-wide transition-colors">
-                    PROGRAM <i class="fas fa-chevron-down text-[9px] opacity-80 pt-0.5"></i>
+                    class="flex items-center gap-1 lg:gap-1.5 xl:gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[12px] lg:text-[13px] xl:text-[14px] uppercase tracking-wide transition-colors">
+                    PROGRAM <i class="fas fa-chevron-down text-[8px] opacity-80 pt-0.5"></i>
                 </button>
                 <button
-                    class="flex items-center gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[14px] uppercase tracking-wide transition-colors">
-                    SDM <i class="fas fa-chevron-down text-[9px] opacity-80 pt-0.5"></i>
+                    class="flex items-center gap-1 lg:gap-1.5 xl:gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[12px] lg:text-[13px] xl:text-[14px] uppercase tracking-wide transition-colors">
+                    SDM <i class="fas fa-chevron-down text-[8px] opacity-80 pt-0.5"></i>
                 </button>
                 <button
-                    class="flex items-center gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[14px] uppercase tracking-wide transition-colors">
-                    FASILITAS <i class="fas fa-chevron-down text-[9px] opacity-80 pt-0.5"></i>
+                    class="flex items-center gap-1 lg:gap-1.5 xl:gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[12px] lg:text-[13px] xl:text-[14px] uppercase tracking-wide transition-colors">
+                    FASILITAS <i class="fas fa-chevron-down text-[8px] opacity-80 pt-0.5"></i>
                 </button>
                 <button
-                    class="flex items-center gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[14px] uppercase tracking-wide transition-colors">
-                    KARYA & AGENDA <i class="fas fa-chevron-down text-[9px] opacity-80 pt-0.5"></i>
+                    class="flex items-center gap-1 lg:gap-1.5 xl:gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[12px] lg:text-[13px] xl:text-[14px] uppercase tracking-wide transition-colors">
+                    KARYA & AGENDA <i class="fas fa-chevron-down text-[8px] opacity-80 pt-0.5"></i>
                 </button>
                 <button
-                    class="flex items-center gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[14px] uppercase tracking-wide transition-colors">
-                    KONTAK <i class="fas fa-chevron-down text-[9px] opacity-80 pt-0.5"></i>
+                    class="flex items-center gap-1 lg:gap-1.5 xl:gap-1.5 text-[#003150] hover:text-black font-bold font-condensed text-[12px] lg:text-[13px] xl:text-[14px] uppercase tracking-wide transition-colors">
+                    KONTAK <i class="fas fa-chevron-down text-[8px] opacity-80 pt-0.5"></i>
                 </button>
             </div>
         </nav>
-        <nav id="mobile-menu" class="lg:hidden hidden bg-white border-t border-slate-200 px-4 py-4 shadow-soft"
+        <nav id="mobile-menu" class="lg:hidden hidden bg-white border-t border-slate-200 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-8 py-3 sm:py-4 md:py-4 lg:py-4 xl:py-4 shadow-soft"
             aria-label="Menu Mobile">
-            <div class="grid grid-cols-2 gap-2 text-[12px] font-bold uppercase tracking-wide text-untan-navy">
+            <div class="grid grid-cols-2 gap-2 text-[11px] sm:text-[12px] md:text-[12px] lg:text-[12px] xl:text-[12px] font-bold uppercase tracking-wide text-untan-navy">
                 <a href="#kbk-section"
-                    class="px-3 py-2 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link">Tentang
+                    class="px-3 py-2.5 sm:py-3 md:py-3 lg:py-3 xl:py-3 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px]">Tentang
                     Kami</a>
                 <a href="#riset-section"
-                    class="px-3 py-2 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link">Program</a>
+                    class="px-3 py-2.5 sm:py-3 md:py-3 lg:py-3 xl:py-3 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px]">Program</a>
                 <a href="#dosen-section"
-                    class="px-3 py-2 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link">SDM</a>
+                    class="px-3 py-2.5 sm:py-3 md:py-3 lg:py-3 xl:py-3 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px]">SDM</a>
                 <a href="#lab-section"
-                    class="px-3 py-2 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link">Fasilitas</a>
+                    class="px-3 py-2.5 sm:py-3 md:py-3 lg:py-3 xl:py-3 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px]">Fasilitas</a>
                 <a href="#riset-section"
-                    class="px-3 py-2 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link">Karya
+                    class="px-3 py-2.5 sm:py-3 md:py-3 lg:py-3 xl:py-3 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px]">Karya
                     & Agenda</a>
                 <a href="#cta-section"
-                    class="px-3 py-2 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link">Kontak</a>
+                    class="px-3 py-2.5 sm:py-3 md:py-3 lg:py-3 xl:py-3 rounded-lg bg-slate-50 hover:bg-untan-blue/5 transition-colors mobile-menu-link text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px]">Kontak</a>
             </div>
             <button id="mobile-lang-toggle-btn" onclick="setLanguage(currentLang === 'id' ? 'en' : 'id')"
-                class="mt-4 w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm font-bold text-untan-navy hover:bg-slate-50 transition-colors">
+                class="mt-3 sm:mt-4 md:mt-4 lg:mt-4 xl:mt-4 w-full px-3 sm:px-4 md:px-4 lg:px-4 xl:px-4 py-2.5 sm:py-3 md:py-3 lg:py-3 xl:py-3 rounded-lg border border-slate-200 text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm font-bold text-untan-navy hover:bg-slate-50 transition-colors">
                 Bahasa: ID
             </button>
         </nav>
 
         <!-- Info Terbaru (Ticker) -->
         <div
-            class="bg-untan-navy text-white flex items-center h-[42px] w-full px-4 lg:px-8 relative z-10 border-t border-white/5">
-            <div class="bg-[#feb401] text-[#003150] font-bold font-condensed px-3 py-1.5 text-[12px] uppercase whitespace-nowrap tracking-wide"
+            class="bg-untan-navy text-white flex items-center h-[36px] sm:h-[38px] md:h-[40px] lg:h-[42px] xl:h-[42px] w-full px-3 sm:px-4 md:px-6 lg:px-8 xl:px-8 relative z-10 border-t border-white/5">
+            <div class="bg-[#feb401] text-[#003150] font-bold font-condensed px-2.5 sm:px-3 md:px-3 lg:px-3 xl:px-3 py-1 sm:py-1.5 md:py-1.5 lg:py-1.5 xl:py-1.5 text-[11px] sm:text-[11px] md:text-[12px] lg:text-[12px] xl:text-[12px] uppercase whitespace-nowrap tracking-wide"
                 data-i18n="info">
                 INFO TERBARU
             </div>
-            <div class="flex-1 overflow-hidden relative flex items-center px-4 h-full ticker-wrap">
-                <div class="ticker-track text-white text-[13px] font-sans flex items-center">
-                    <span class="mx-4" data-i18n="tickerItem1">Selamat datang di antarmuka situs web Informatika
+            <div class="flex-1 overflow-hidden relative flex items-center px-3 sm:px-4 md:px-4 lg:px-4 xl:px-4 h-full ticker-wrap">
+                <div class="ticker-track text-white text-[11px] sm:text-[12px] md:text-[13px] lg:text-[13px] xl:text-[13px] font-sans flex items-center">
+                    <span class="mx-3 sm:mx-4 md:mx-4 lg:mx-4 xl:mx-4" data-i18n="tickerItem1">Selamat datang di antarmuka situs web Informatika
                         terbaru!</span> <span class="text-white/40 mx-2">|</span>
-                    <span class="mx-4" data-i18n="tickerItem2">Selamat menunaikan ibadah puasa Ramadhan 1447 H</span>
+                    <span class="mx-3 sm:mx-4 md:mx-4 lg:mx-4 xl:mx-4" data-i18n="tickerItem2">Selamat menunaikan ibadah puasa Ramadhan 1447 H</span>
                     <span class="text-white/40 mx-2">|</span>
-                    <span class="mx-4" data-i18n="tickerItem3">Selamat Tahun Baru Imlek 2026! Gong Xi Fa Cai</span>
+                    <span class="mx-3 sm:mx-4 md:mx-4 lg:mx-4 xl:mx-4" data-i18n="tickerItem3">Selamat Tahun Baru Imlek 2026! Gong Xi Fa Cai</span>
                     <span class="text-white/40 mx-2">|</span>
-                    <span class="mx-4" data-i18n="tickerItem1">Selamat datang di antarmuka situs web Informatika
+                    <span class="mx-3 sm:mx-4 md:mx-4 lg:mx-4 xl:mx-4" data-i18n="tickerItem1">Selamat datang di antarmuka situs web Informatika
                         terbaru!</span> <span class="text-white/40 mx-2">|</span>
-                    <span class="mx-4" data-i18n="tickerItem2">Selamat menunaikan ibadah puasa Ramadhan 1447 H</span>
+                    <span class="mx-3 sm:mx-4 md:mx-4 lg:mx-4 xl:mx-4" data-i18n="tickerItem2">Selamat menunaikan ibadah puasa Ramadhan 1447 H</span>
                     <span class="text-white/40 mx-2">|</span>
-                    <span class="mx-4" data-i18n="tickerItem3">Selamat Tahun Baru Imlek 2026! Gong Xi Fa Cai</span>
+                    <span class="mx-3 sm:mx-4 md:mx-4 lg:mx-4 xl:mx-4" data-i18n="tickerItem3">Selamat Tahun Baru Imlek 2026! Gong Xi Fa Cai</span>
                 </div>
             </div>
         </div>
@@ -340,7 +429,7 @@
 
     <!-- Breadcrumb (Diubah menyesuaikan pepet kiri navbar) -->
     <div class="bg-white">
-        <div class="w-full px-4 lg:px-8 py-8 text-xs font-medium text-gray-500 uppercase">
+        <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 py-6 sm:py-7 md:py-8 lg:py-8 xl:py-8 text-[10px] sm:text-[11px] md:text-xs lg:text-xs xl:text-xs font-medium text-gray-500 uppercase">
             <span data-i18n="home">BERANDA</span> <span class="mx-2">/</span> <span class="text-untan-blue font-bold"
                 data-i18n="pageTitle">RISET & KBK</span>
         </div>
@@ -348,27 +437,27 @@
 
     <!-- Hero Section -->
     <header class="bg-untan-navy relative reveal">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 md:py-24">
-            <div class="inline-block bg-untan-yellow text-untan-navy text-xs font-bold px-3 py-1 rounded mb-4 uppercase tracking-wider"
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 relative z-10 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
+            <div class="inline-block bg-untan-yellow text-untan-navy text-[10px] sm:text-xs md:text-xs lg:text-xs xl:text-sm font-bold px-2.5 sm:px-3 md:px-3 lg:px-3 xl:px-4 py-1 rounded mb-3 sm:mb-4 md:mb-4 lg:mb-4 xl:mb-5 uppercase tracking-wider"
                 data-i18n="badgeHero">
                 Riset & Kelompok Bidang Keahlian
             </div>
-            <h2 class="text-3xl md:text-5xl font-bold font-condensed text-white mb-4 leading-tight"
+            <h2 class="text-2xl sm:text-2.5xl md:text-3xl lg:text-4xl xl:text-5xl font-bold font-condensed text-white mb-3 sm:mb-4 md:mb-4 lg:mb-5 xl:mb-6 leading-tight"
                 data-i18n="heroTitle">
                 Riset & Kelompok Bidang Keahlian
             </h2>
-            <p class="text-gray-300 max-w-2xl text-lg mb-8" data-i18n="heroDesc">
+            <p class="text-gray-300 max-w-2xl text-xs sm:text-sm md:text-base lg:text-lg xl:text-lg mb-6 sm:mb-8 md:mb-8 lg:mb-8 xl:mb-10 leading-relaxed" data-i18n="heroDesc">
                 Kenali Kelompok Bidang Keahlian (KBK) kami. Jelajahi riset unggulan dosen dan mahasiswa di bidang
                 Kecerdasan Buatan (AI), Rekayasa Perangkat Lunak, hingga IoT
             </p>
-            <div class="flex flex-wrap gap-4">
+            <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 md:gap-4 lg:gap-5 xl:gap-6">
                 <a href="#kbk-section"
-                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-untan-yellow text-untan-navy font-bold hover:bg-yellow-300 transition-colors">
+                    class="inline-flex items-center justify-center sm:justify-start gap-2 px-4 sm:px-6 md:px-6 lg:px-6 xl:px-8 py-2.5 sm:py-3 md:py-3 lg:py-3 xl:py-4 rounded-xl bg-untan-yellow text-untan-navy font-bold text-sm sm:text-base md:text-base lg:text-base xl:text-lg hover:bg-yellow-300 transition-colors">
                     <i class="fa-solid fa-layer-group"></i>
                     <span data-i18n="quickActionKbk">Jelajahi KBK</span>
                 </a>
                 <a href="#riset-section"
-                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/30 text-white font-bold hover:bg-white/10 transition-colors">
+                    class="inline-flex items-center justify-center sm:justify-start gap-2 px-4 sm:px-6 md:px-6 lg:px-6 xl:px-8 py-2.5 sm:py-3 md:py-3 lg:py-3 xl:py-4 rounded-xl border border-white/30 text-white font-bold text-sm sm:text-base md:text-base lg:text-base xl:text-lg hover:bg-white/10 transition-colors">
                     <i class="fa-solid fa-magnifying-glass-chart"></i>
                     <span data-i18n="quickActionRiset">Cari Publikasi</span>
                 </a>
@@ -378,45 +467,45 @@
     <!-- Main Content Sections -->
     <main id="main-content">
         <!-- KBK Section -->
-        <section class="bg-slate-50 py-16 lg:py-24 border-t border-gray-100 reveal" id="kbk-section">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
+        <section class="bg-slate-50 py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 border-t border-gray-100 reveal" id="kbk-section">
+            <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10">
+                <div class="text-center mb-10 sm:mb-12 md:mb-14 lg:mb-16 xl:mb-20">
                     <span
-                        class="inline-block bg-untan-blue/10 text-untan-blue text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4"
+                        class="inline-block bg-untan-blue/10 text-untan-blue text-[9px] sm:text-[10px] md:text-xs lg:text-xs xl:text-[10px] font-bold px-2.5 sm:px-3 md:px-3 lg:px-3 xl:px-3 py-0.75 sm:py-1 md:py-1 lg:py-1 xl:py-1 rounded-full uppercase tracking-widest mb-3 sm:mb-4 md:mb-4 lg:mb-4 xl:mb-5"
                         data-i18n="badgeHero">Kelompok Bidang Keahlian</span>
-                    <h2 class="text-3xl md:text-5xl font-bold font-condensed text-untan-navy mb-4" data-i18n="kbkTitle">
+                    <h2 class="text-2xl sm:text-2.5xl md:text-3xl lg:text-4xl xl:text-5xl font-bold font-condensed text-untan-navy mb-3 sm:mb-4 md:mb-4 lg:mb-5 xl:mb-6" data-i18n="kbkTitle">
                         4 Pilar Keilmuan Informatika UNTAN</h2>
-                    <p class="text-gray-500 max-w-2xl mx-auto text-lg" data-i18n="kbkDesc">Setiap KBK berfokus pada
+                    <p class="text-gray-500 max-w-2xl mx-auto text-xs sm:text-sm md:text-base lg:text-base xl:text-lg leading-relaxed" data-i18n="kbkDesc">Setiap KBK berfokus pada
                         topik riset spesifik, dipimpin dosen berpengalaman, dan terbuka untuk kolaborasi.</p>
                 </div>
 
-                <div id="kbk-card-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div id="kbk-card-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8">
                     <!-- AI Card -->
                     <article data-kbk-card="ai"
-                        class="bg-white p-8 rounded-3xl shadow-soft border border-gray-100 hover:shadow-soft-lg hover:border-untan-yellow transition-all duration-500 group flex flex-col h-full border-t-4 border-t-untan-navy">
+                        class="bg-white p-5 sm:p-6 md:p-7 lg:p-8 xl:p-8 rounded-2xl sm:rounded-2.5xl md:rounded-3xl lg:rounded-3xl xl:rounded-3xl shadow-soft border border-gray-100 hover:shadow-soft-lg hover:border-untan-yellow transition-all duration-500 group flex flex-col h-full border-t-4 border-t-untan-navy">
                         <div
-                            class="w-14 h-14 bg-slate-50 text-untan-navy rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-untan-yellow group-hover:text-untan-navy transition-all duration-300">
+                            class="w-12 h-12 sm:w-12 md:w-13 lg:w-14 xl:w-14 bg-slate-50 text-untan-navy rounded-xl sm:rounded-xl md:rounded-2xl lg:rounded-2xl xl:rounded-2xl flex items-center justify-center mb-5 sm:mb-6 md:mb-7 lg:mb-8 xl:mb-8 text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl group-hover:bg-untan-yellow group-hover:text-untan-navy transition-all duration-300">
                             <i class="fa-solid fa-brain"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-untan-navy mb-4" data-i18n="filterAI">Kecerdasan Buatan</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed mb-6 flex-grow">Sistem cerdas berbasis AI, deep
+                        <h3 class="text-base sm:text-base md:text-lg lg:text-xl xl:text-xl font-bold text-untan-navy mb-3 sm:mb-3 md:mb-4 lg:mb-4 xl:mb-4" data-i18n="filterAI">Kecerdasan Buatan</h3>
+                        <p class="text-gray-600 text-xs sm:text-xs md:text-sm lg:text-sm xl:text-sm leading-relaxed mb-4 sm:mb-5 md:mb-6 lg:mb-6 xl:mb-6 flex-grow">Sistem cerdas berbasis AI, deep
                             learning, vision, dan NLP untuk solusi nyata.</p>
-                        <div class="flex flex-wrap gap-2 mb-8">
+                        <div class="flex flex-wrap gap-1.5 sm:gap-2 md:gap-2 lg:gap-2 xl:gap-2 mb-5 sm:mb-6 md:mb-8 lg:mb-8 xl:mb-8">
                             <span
-                                class="text-[10px] bg-slate-50 text-gray-500 border border-gray-100 px-3 py-1 rounded-lg font-mono">Vision</span>
+                                class="text-[9px] sm:text-[9px] md:text-[10px] lg:text-[10px] xl:text-[10px] bg-slate-50 text-gray-500 border border-gray-100 px-2.5 sm:px-3 md:px-3 lg:px-3 xl:px-3 py-1 rounded-lg font-mono">Vision</span>
                             <span
-                                class="text-[10px] bg-slate-50 text-gray-500 border border-gray-100 px-3 py-1 rounded-lg font-mono">NLP</span>
+                                class="text-[9px] sm:text-[9px] md:text-[10px] lg:text-[10px] xl:text-[10px] bg-slate-50 text-gray-500 border border-gray-100 px-2.5 sm:px-3 md:px-3 lg:px-3 xl:px-3 py-1 rounded-lg font-mono">NLP</span>
                         </div>
-                        <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+                        <div class="flex items-center justify-between pt-4 sm:pt-5 md:pt-6 lg:pt-6 xl:pt-6 border-t border-gray-100">
                             <div class="flex -space-x-2">
                                 <div
-                                    class="w-8 h-8 rounded-full bg-untan-navy border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
+                                    class="w-7 h-7 sm:w-7 md:w-8 lg:w-8 xl:w-8 rounded-full bg-untan-navy border-2 border-white flex items-center justify-center text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] xl:text-[10px] font-bold text-white shadow-sm">
                                     AS</div>
                                 <div
-                                    class="w-8 h-8 rounded-full bg-untan-blue border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
+                                    class="w-7 h-7 sm:w-7 md:w-8 lg:w-8 xl:w-8 rounded-full bg-untan-blue border-2 border-white flex items-center justify-center text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] xl:text-[10px] font-bold text-white shadow-sm">
                                     RH</div>
                                 <div
-                                    class="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-gray-400 shadow-sm">
+                                    class="w-7 h-7 sm:w-7 md:w-8 lg:w-8 xl:w-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] xl:text-[10px] font-bold text-gray-400 shadow-sm">
                                     +6</div>
                             </div>
                             <button type="button" onclick="openKbkInsight('ai')"
@@ -540,54 +629,54 @@
                 </div>
 
                 <section id="kbk-insight-section"
-                    class="mt-12 rounded-[2rem] border border-slate-100 bg-white shadow-soft overflow-hidden">
+                    class="mt-8 sm:mt-10 md:mt-12 lg:mt-12 xl:mt-12 rounded-2xl sm:rounded-2.5xl md:rounded-3xl lg:rounded-3xl xl:rounded-3xl border border-slate-100 bg-white shadow-soft overflow-hidden">
                     <div class="grid lg:grid-cols-[0.95fr_1.05fr]">
                         <div id="kbk-insight-hero"
-                            class="p-8 lg:p-10 border-b lg:border-b-0 lg:border-r border-slate-100 bg-gradient-to-br from-untan-blue/10 via-white to-untan-yellow/10">
+                            class="p-5 sm:p-6 md:p-8 lg:p-10 xl:p-10 border-b lg:border-b-0 lg:border-r border-slate-100 bg-gradient-to-br from-untan-blue/10 via-white to-untan-yellow/10">
                             <div
-                                class="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] text-untan-blue">
+                                class="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 sm:px-3.5 md:px-4 lg:px-4 xl:px-4 py-1.5 sm:py-1.75 md:py-2 lg:py-2 xl:py-2 text-[10px] sm:text-[10px] md:text-[11px] lg:text-[11px] xl:text-[11px] font-bold uppercase tracking-[0.24em] text-untan-blue">
                                 <i id="kbk-insight-icon" class="fa-solid fa-brain"></i>
                                 <span id="kbk-insight-badge">KBK Insight</span>
                             </div>
                             <h3 id="kbk-insight-title"
-                                class="mt-6 text-3xl md:text-4xl font-bold font-condensed text-untan-navy"></h3>
-                            <p id="kbk-insight-desc" class="mt-5 text-slate-600 text-base leading-relaxed"></p>
-                            <div class="mt-8 rounded-3xl border border-white/80 bg-white/90 p-6 shadow-soft">
+                                class="mt-4 sm:mt-5 md:mt-6 lg:mt-6 xl:mt-6 text-2xl sm:text-2.5xl md:text-3xl lg:text-4xl xl:text-4xl font-bold font-condensed text-untan-navy"></h3>
+                            <p id="kbk-insight-desc" class="mt-3 sm:mt-4 md:mt-5 lg:mt-5 xl:mt-5 text-slate-600 text-xs sm:text-sm md:text-base lg:text-base xl:text-base leading-relaxed"></p>
+                            <div class="mt-6 sm:mt-7 md:mt-8 lg:mt-8 xl:mt-8 rounded-2xl sm:rounded-2.5xl md:rounded-3xl lg:rounded-3xl xl:rounded-3xl border border-white/80 bg-white/90 p-4 sm:p-5 md:p-6 lg:p-6 xl:p-6 shadow-soft">
                                 <p id="kbk-insight-lead-label"
-                                    class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
-                                <div class="mt-4 flex items-center gap-4">
+                                    class="text-[10px] sm:text-[10px] md:text-[11px] lg:text-[11px] xl:text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
+                                <div class="mt-3 sm:mt-3.5 md:mt-4 lg:mt-4 xl:mt-4 flex items-center gap-3 sm:gap-3.5 md:gap-4 lg:gap-4 xl:gap-4">
                                     <div id="kbk-insight-lead-initials"
-                                        class="flex h-16 w-16 items-center justify-center rounded-2xl bg-untan-navy text-white text-xl font-bold">
+                                        class="flex h-12 w-12 sm:h-12 md:h-14 lg:h-16 xl:h-16 sm:w-12 md:w-14 lg:w-16 xl:w-16 items-center justify-center rounded-xl sm:rounded-xl md:rounded-2xl lg:rounded-2xl xl:rounded-2xl bg-untan-navy text-white text-lg sm:text-lg md:text-xl lg:text-xl xl:text-xl font-bold">
                                     </div>
                                     <div>
-                                        <h4 id="kbk-insight-lead-name" class="text-lg font-bold text-untan-navy"></h4>
-                                        <p id="kbk-insight-lead-rank" class="text-sm text-slate-500"></p>
+                                        <h4 id="kbk-insight-lead-name" class="text-base sm:text-base md:text-lg lg:text-lg xl:text-lg font-bold text-untan-navy"></h4>
+                                        <p id="kbk-insight-lead-rank" class="text-xs sm:text-xs md:text-sm lg:text-sm xl:text-sm text-slate-500"></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-8 lg:p-10">
-                            <div class="grid md:grid-cols-3 gap-6">
-                                <div class="rounded-3xl border border-slate-100 bg-slate-50 p-6">
+                        <div class="p-5 sm:p-6 md:p-8 lg:p-10 xl:p-10">
+                            <div class="grid md:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-6 xl:gap-6">
+                                <div class="rounded-2xl sm:rounded-2.5xl md:rounded-3xl lg:rounded-3xl xl:rounded-3xl border border-slate-100 bg-slate-50 p-4 sm:p-5 md:p-6 lg:p-6 xl:p-6">
                                     <p id="kbk-focus-label"
-                                        class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
-                                    <p id="kbk-focus-text" class="mt-4 text-sm text-slate-600 leading-relaxed"></p>
+                                        class="text-[10px] sm:text-[10px] md:text-[11px] lg:text-[11px] xl:text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
+                                    <p id="kbk-focus-text" class="mt-3 sm:mt-3.5 md:mt-4 lg:mt-4 xl:mt-4 text-xs sm:text-xs md:text-sm lg:text-sm xl:text-sm text-slate-600 leading-relaxed"></p>
                                 </div>
-                                <div class="rounded-3xl border border-slate-100 bg-slate-50 p-6">
+                                <div class="rounded-2xl sm:rounded-2.5xl md:rounded-3xl lg:rounded-3xl xl:rounded-3xl border border-slate-100 bg-slate-50 p-4 sm:p-5 md:p-6 lg:p-6 xl:p-6">
                                     <p id="kbk-output-label"
-                                        class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
-                                    <p id="kbk-output-text" class="mt-4 text-sm text-slate-600 leading-relaxed"></p>
+                                        class="text-[10px] sm:text-[10px] md:text-[11px] lg:text-[11px] xl:text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
+                                    <p id="kbk-output-text" class="mt-3 sm:mt-3.5 md:mt-4 lg:mt-4 xl:mt-4 text-xs sm:text-xs md:text-sm lg:text-sm xl:text-sm text-slate-600 leading-relaxed"></p>
                                 </div>
-                                <div class="rounded-3xl border border-slate-100 bg-slate-50 p-6">
+                                <div class="rounded-2xl sm:rounded-2.5xl md:rounded-3xl lg:rounded-3xl xl:rounded-3xl border border-slate-100 bg-slate-50 p-4 sm:p-5 md:p-6 lg:p-6 xl:p-6">
                                     <p id="kbk-collab-label"
-                                        class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
-                                    <p id="kbk-collab-text" class="mt-4 text-sm text-slate-600 leading-relaxed"></p>
+                                        class="text-[10px] sm:text-[10px] md:text-[11px] lg:text-[11px] xl:text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
+                                    <p id="kbk-collab-text" class="mt-3 sm:mt-3.5 md:mt-4 lg:mt-4 xl:mt-4 text-xs sm:text-xs md:text-sm lg:text-sm xl:text-sm text-slate-600 leading-relaxed"></p>
                                 </div>
                             </div>
-                            <div class="mt-8">
+                            <div class="mt-6 sm:mt-7 md:mt-8 lg:mt-8 xl:mt-8">
                                 <p id="kbk-topic-label"
-                                    class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
-                                <div id="kbk-topic-tags" class="mt-4 flex flex-wrap gap-3"></div>
+                                    class="text-[10px] sm:text-[10px] md:text-[11px] lg:text-[11px] xl:text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400"></p>
+                                <div id="kbk-topic-tags" class="mt-3 sm:mt-3.5 md:mt-4 lg:mt-4 xl:mt-4 flex flex-wrap gap-2.5 sm:gap-3 md:gap-3 lg:gap-3 xl:gap-3"></div>
                             </div>
                         </div>
                     </div>
@@ -596,119 +685,119 @@
         </section>
 
         <!-- Stats Section -->
-        <section class="bg-untan-navy py-16 relative overflow-hidden reveal">
+        <section class="bg-untan-navy py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 relative overflow-hidden reveal">
             <div class="absolute inset-0 opacity-[0.03] bg-pattern pointer-events-none"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid grid-cols-2 lg:grid-cols-5 gap-10 text-center">
+            <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 relative z-10">
+                <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-10 text-center">
                     <div>
-                        <div class="text-4xl lg:text-5xl font-bold font-condensed text-untan-yellow mb-2">180+</div>
-                        <p class="text-[10px] text-slate-300 uppercase tracking-widest font-bold" data-i18n="statsPub">
+                        <div class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl font-bold font-condensed text-untan-yellow mb-1.5 sm:mb-2 md:mb-2 lg:mb-2 xl:mb-2">180+</div>
+                        <p class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[10px] xl:text-[10px] text-slate-300 uppercase tracking-widest font-bold" data-i18n="statsPub">
                             Publikasi Terindeks</p>
                     </div>
                     <div>
-                        <div class="text-4xl lg:text-5xl font-bold font-condensed text-white mb-2">12</div>
-                        <p class="text-[10px] text-slate-300 uppercase tracking-widest font-bold"
+                        <div class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl font-bold font-condensed text-white mb-1.5 sm:mb-2 md:mb-2 lg:mb-2 xl:mb-2">12</div>
+                        <p class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[10px] xl:text-[10px] text-slate-300 uppercase tracking-widest font-bold"
                             data-i18n="statsHibah">Hibah Riset Aktif</p>
                     </div>
                     <div>
-                        <div class="text-4xl lg:text-5xl font-bold font-condensed text-untan-yellow mb-2">31</div>
-                        <p class="text-[10px] text-slate-300 uppercase tracking-widest font-bold"
+                        <div class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl font-bold font-condensed text-untan-yellow mb-1.5 sm:mb-2 md:mb-2 lg:mb-2 xl:mb-2">31</div>
+                        <p class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[10px] xl:text-[10px] text-slate-300 uppercase tracking-widest font-bold"
                             data-i18n="statsDosen">Dosen Peneliti</p>
                     </div>
                     <div>
-                        <div class="text-4xl lg:text-5xl font-bold font-condensed text-white mb-2">48+</div>
-                        <p class="text-[10px] text-slate-300 uppercase tracking-widest font-bold"
+                        <div class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl font-bold font-condensed text-white mb-1.5 sm:mb-2 md:mb-2 lg:mb-2 xl:mb-2">48+</div>
+                        <p class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[10px] xl:text-[10px] text-slate-300 uppercase tracking-widest font-bold"
                             data-i18n="statsKolaborasi">Kolaborasi Industri</p>
                     </div>
                     <div class="col-span-2 lg:col-span-1">
-                        <div class="text-4xl lg:text-5xl font-bold font-condensed text-untan-yellow mb-2">320+</div>
-                        <p class="text-[10px] text-slate-300 uppercase tracking-widest font-bold">Mahasiswa Terlibat</p>
+                        <div class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl font-bold font-condensed text-untan-yellow mb-1.5 sm:mb-2 md:mb-2 lg:mb-2 xl:mb-2">320+</div>
+                        <p class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[10px] xl:text-[10px] text-slate-300 uppercase tracking-widest font-bold">Mahasiswa Terlibat</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Riset & Publikasi Section -->
-        <section class="py-20 lg:py-28 bg-white reveal" id="riset-section">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8">
+        <section class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 bg-white reveal" id="riset-section">
+            <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10">
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-10 sm:mb-12 md:mb-14 lg:mb-16 xl:mb-20 gap-6 sm:gap-8 md:gap-10 lg:gap-8">
                     <div class="max-w-2xl">
-                        <span class="text-untan-blue font-bold text-xs uppercase tracking-widest mb-3 block">Academic
+                        <span class="text-untan-blue font-bold text-[9px] sm:text-[10px] md:text-xs lg:text-xs xl:text-xs uppercase tracking-widest mb-2 sm:mb-3 md:mb-3 lg:mb-3 xl:mb-3 block">Academic
                             Achievements</span>
-                        <h2 class="text-3xl md:text-5xl font-bold font-condensed text-untan-navy mb-6"
+                        <h2 class="text-2xl sm:text-2.5xl md:text-3xl lg:text-4xl xl:text-5xl font-bold font-condensed text-untan-navy mb-3 sm:mb-4 md:mb-4 lg:mb-5 xl:mb-6"
                             data-i18n="risetTitle">Publikasi & Penelitian Terkini</h2>
-                        <div class="w-24 h-1 bg-untan-yellow rounded-full"></div>
+                        <div class="w-20 sm:w-20 md:w-24 lg:w-24 xl:w-24 h-0.75 sm:h-1 md:h-1 lg:h-1 xl:h-1 bg-untan-yellow rounded-full"></div>
                     </div>
 
                     <!-- Filter Controls -->
-                    <div class="w-full lg:w-auto space-y-3">
+                    <div class="w-full lg:w-auto space-y-2 sm:space-y-2.5 md:space-y-3 lg:space-y-3 xl:space-y-3">
                         <label for="riset-search"
-                            class="text-[11px] font-bold uppercase tracking-wider text-slate-500 block"
+                            class="text-[10px] sm:text-[10px] md:text-[11px] lg:text-[11px] xl:text-[11px] font-bold uppercase tracking-wider text-slate-500 block"
                             data-i18n="searchLabel">Cari publikasi</label>
                         <div class="relative">
                             <i
-                                class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                                class="fa-solid fa-magnifying-glass absolute left-3 sm:left-3.5 md:left-4 lg:left-4 xl:left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                             <input id="riset-search" oninput="searchRiset(this.value)"
                                 data-i18n-placeholder="searchPlaceholder" type="text"
-                                class="w-full lg:w-[320px] pl-10 pr-10 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-untan-blue focus:ring-2 focus:ring-untan-blue/10"
+                                class="w-full lg:w-[300px] xl:w-[320px] pl-9 sm:pl-10 md:pl-10 lg:pl-10 xl:pl-10 pr-9 sm:pr-10 md:pr-10 lg:pr-10 xl:pr-10 py-2.5 sm:py-3 md:py-3 lg:py-3 xl:py-3 rounded-xl border border-slate-200 text-xs sm:text-xs md:text-sm lg:text-sm xl:text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-untan-blue focus:ring-2 focus:ring-untan-blue/10"
                                 placeholder="Cari judul, penulis, atau venue...">
                             <button id="clear-riset-search"
                                 onclick="document.getElementById('riset-search').value=''; searchRiset('')"
                                 aria-label="Reset pencarian publikasi"
-                                class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors">
+                                class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 md:w-6 md:h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors">
                                 <i class="fa-solid fa-xmark text-xs"></i>
                             </button>
                         </div>
-                        <div class="flex flex-wrap items-center gap-4">
-                            <div class="flex flex-wrap gap-2 p-1.5 bg-gray-50 rounded-xl border border-gray-100">
+                        <div class="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 sm:gap-4 md:gap-4 lg:gap-3 xl:gap-4">
+                            <div class="flex flex-wrap gap-1.5 sm:gap-2 md:gap-2 lg:gap-1.5 xl:gap-2 p-1 sm:p-1.5 md:p-1.5 lg:p-1.5 xl:p-1.5 bg-gray-50 rounded-xl border border-gray-100 w-full sm:w-auto">
                                 <button onclick="filterRiset('all')" data-filter="all"
-                                    class="filter-btn px-5 py-2.5 rounded-lg bg-untan-navy text-white shadow-soft font-bold text-[11px] uppercase tracking-wider transition-all"
+                                    class="filter-btn px-3 sm:px-4 md:px-5 lg:px-5 xl:px-5 py-2 rounded-lg bg-untan-navy text-white shadow-soft font-bold text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px] uppercase tracking-wider transition-all"
                                     data-i18n="filterAll">Semua</button>
                                 <button onclick="filterRiset('ai')" data-filter="ai"
-                                    class="filter-btn px-5 py-2.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-untan-navy font-bold text-[11px] uppercase tracking-wider transition-all"
+                                    class="filter-btn px-3 sm:px-4 md:px-5 lg:px-5 xl:px-5 py-2 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-untan-navy font-bold text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px] uppercase tracking-wider transition-all"
                                     data-i18n="filterAI">AI</button>
                                 <button onclick="filterRiset('rpl')" data-filter="rpl"
-                                    class="filter-btn px-5 py-2.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-untan-navy font-bold text-[11px] uppercase tracking-wider transition-all"
+                                    class="filter-btn px-3 sm:px-4 md:px-5 lg:px-5 xl:px-5 py-2 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-untan-navy font-bold text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px] uppercase tracking-wider transition-all"
                                     data-i18n="filterRPL">RPL</button>
                                 <button onclick="filterRiset('net')" data-filter="net"
-                                    class="filter-btn px-5 py-2.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-untan-navy font-bold text-[11px] uppercase tracking-wider transition-all"
+                                    class="filter-btn px-3 sm:px-4 md:px-5 lg:px-5 xl:px-5 py-2 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-untan-navy font-bold text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px] uppercase tracking-wider transition-all"
                                     data-i18n="filterNet">Jaringan</button>
                                 <button onclick="filterRiset('si')" data-filter="si"
-                                    class="filter-btn px-5 py-2.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-untan-navy font-bold text-[11px] uppercase tracking-wider transition-all"
+                                    class="filter-btn px-3 sm:px-4 md:px-5 lg:px-5 xl:px-5 py-2 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-untan-navy font-bold text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px] uppercase tracking-wider transition-all"
                                     data-i18n="filterSI">SI</button>
                             </div>
 
-                            <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-2 sm:gap-2.5 md:gap-3 lg:gap-3 xl:gap-3">
                                 <span
-                                    class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tampilkan:</span>
-                                <div class="flex gap-1.5">
+                                    class="text-[9px] sm:text-[10px] md:text-[10px] lg:text-[10px] xl:text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tampilkan:</span>
+                                <div class="flex gap-1 sm:gap-1.5 md:gap-1.5 lg:gap-1.5 xl:gap-1.5">
                                     <button onclick="setLimit(9)" data-limit="9"
-                                        class="limit-btn px-4 py-2 rounded-xl bg-untan-navy text-white shadow-soft text-[11px] font-bold transition-all">9</button>
+                                        class="limit-btn px-3 sm:px-3.5 md:px-4 lg:px-4 xl:px-4 py-1.5 sm:py-2 md:py-2 lg:py-2 xl:py-2 rounded-xl bg-untan-navy text-white shadow-soft text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px] font-bold transition-all">9</button>
                                     <button onclick="setLimit(50)" data-limit="50"
-                                        class="limit-btn px-4 py-2 rounded-xl bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 text-[11px] font-bold transition-all">50</button>
+                                        class="limit-btn px-3 sm:px-3.5 md:px-4 lg:px-4 xl:px-4 py-1.5 sm:py-2 md:py-2 lg:py-2 xl:py-2 rounded-xl bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px] font-bold transition-all">50</button>
                                     <button onclick="setLimit(100)" data-limit="100"
-                                        class="limit-btn px-4 py-2 rounded-xl bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 text-[11px] font-bold transition-all">100</button>
+                                        class="limit-btn px-3 sm:px-3.5 md:px-4 lg:px-4 xl:px-4 py-1.5 sm:py-2 md:py-2 lg:py-2 xl:py-2 rounded-xl bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px] font-bold transition-all">100</button>
                                     <button onclick="setLimit(200)" data-limit="200"
-                                        class="limit-btn px-4 py-2 rounded-xl bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 text-[11px] font-bold transition-all">200</button>
+                                        class="limit-btn px-3 sm:px-3.5 md:px-4 lg:px-4 xl:px-4 py-1.5 sm:py-2 md:py-2 lg:py-2 xl:py-2 rounded-xl bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px] font-bold transition-all">200</button>
                                     <button onclick="setLimit(500)" data-limit="500"
-                                        class="limit-btn px-4 py-2 rounded-xl bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 text-[11px] font-bold transition-all">500</button>
+                                        class="limit-btn px-3 sm:px-3.5 md:px-4 lg:px-4 xl:px-4 py-1.5 sm:py-2 md:py-2 lg:py-2 xl:py-2 rounded-xl bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 text-[10px] sm:text-[11px] md:text-[11px] lg:text-[11px] xl:text-[11px] font-bold transition-all">500</button>
                                 </div>
                             </div>
                         </div>
                         <div id="riset-count-info"
-                            class="mt-4 text-[11px] font-medium text-slate-400 uppercase tracking-widest">
+                            class="mt-3 sm:mt-3.5 md:mt-4 lg:mt-3 xl:mt-4 text-[10px] sm:text-[10px] md:text-[11px] lg:text-[11px] xl:text-[11px] font-medium text-slate-400 uppercase tracking-widest">
                             Menghitung data...
                         </div>
                     </div>
                 </div>
 
-                <div id="riset-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div id="riset-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8 xl:gap-8 mb-10 sm:mb-12 md:mb-14 lg:mb-16 xl:mb-20">
                     <!-- Cards generated by JS -->
                 </div>
 
                 <div id="view-all-section" class="text-center" style="display: none;">
                     <button onclick="setLimit(50)"
-                        class="group inline-flex items-center gap-3 px-10 py-4 bg-white border-2 border-untan-navy text-untan-navy font-bold rounded-full hover:bg-untan-navy hover:text-white transition-all duration-300">
+                        class="group inline-flex items-center gap-3 px-8 sm:px-10 md:px-10 lg:px-10 xl:px-12 py-3 sm:py-4 md:py-4 lg:py-4 xl:py-5 bg-white border-2 border-untan-navy text-untan-navy font-bold text-sm sm:text-base md:text-base lg:text-base xl:text-base rounded-full hover:bg-untan-navy hover:text-white transition-all duration-300">
                         <span data-i18n="viewAll">Lihat Publikasi Lainnya</span>
                         <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     </button>
@@ -717,45 +806,45 @@
         </section>
 
         <!-- Dosen Section -->
-        <section class="py-20 lg:py-28 bg-gray-50 reveal" id="dosen-section">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-20">
+        <section class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 bg-gray-50 reveal" id="dosen-section">
+            <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10">
+                <div class="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 xl:mb-28">
                     <span
-                        class="inline-block bg-blue-100 text-untan-blue text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4">Experts
+                        class="inline-block bg-blue-100 text-untan-blue text-[10px] sm:text-[10px] md:text-xs lg:text-xs xl:text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3 sm:mb-4 md:mb-4 lg:mb-4 xl:mb-5">Experts
                         Directory</span>
-                    <h2 class="text-3xl md:text-5xl font-bold font-condensed text-gray-900 mb-6" data-i18n="dosenTitle">
+                    <h2 class="text-2xl sm:text-2.5xl md:text-3xl lg:text-4xl xl:text-5xl font-bold font-condensed text-gray-900 mb-3 sm:mb-4 md:mb-4 lg:mb-5 xl:mb-6" data-i18n="dosenTitle">
                         Peneliti & Dosen per Kelompok Keahlian</h2>
-                    <p class="max-w-3xl mx-auto text-slate-500 text-lg" data-i18n="dosenLeadDesc">Bagian ini menampilkan
+                    <p class="max-w-3xl mx-auto text-slate-500 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg leading-relaxed" data-i18n="dosenLeadDesc">Bagian ini menampilkan
                         ketua setiap KBK. Pilih kartu untuk melihat dosen lain di kelompok keahlian tersebut.</p>
                 </div>
 
-                <div id="dosen-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
+                <div id="dosen-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 md:gap-7 lg:gap-8 xl:gap-8">
                     <!-- Cards generated by JS -->
                 </div>
             </div>
         </section>
 
         <!-- Labs Section -->
-        <section class="py-20 lg:py-32 bg-white reveal" id="lab-section">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-20 gap-12">
+        <section class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 bg-white reveal" id="lab-section">
+            <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-12 sm:mb-16 md:mb-20 lg:mb-24 xl:mb-28 gap-8 sm:gap-10 md:gap-12 lg:gap-12 xl:gap-12">
                     <div class="max-w-2xl">
-                        <h2 class="text-3xl md:text-5xl font-bold font-condensed text-untan-navy mb-8 leading-tight"
+                        <h2 class="text-2xl sm:text-2.5xl md:text-3xl lg:text-4xl xl:text-5xl font-bold font-condensed text-untan-navy mb-5 sm:mb-6 md:mb-7 lg:mb-8 xl:mb-8 leading-tight"
                             data-i18n="labTitle">Laboratorium Pendukung Riset</h2>
-                        <p class="text-slate-500 text-lg leading-relaxed">8 laboratorium modern dengan fasilitas terkini
+                        <p class="text-slate-500 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg leading-relaxed">8 laboratorium modern dengan fasilitas terkini
                             yang mendukung kegiatan riset strategis dan pengembangan teknologi dosen serta mahasiswa.
                         </p>
                     </div>
                     <div class="shrink-0">
-                        <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 text-center shadow-soft">
-                            <div class="text-5xl font-bold text-untan-navy mb-2">08</div>
-                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em]">Labs Modern
+                        <div class="bg-slate-50 p-6 sm:p-7 md:p-8 lg:p-8 xl:p-8 rounded-2xl sm:rounded-2.5xl md:rounded-3xl lg:rounded-3xl xl:rounded-3xl border border-slate-100 text-center shadow-soft">
+                            <div class="text-4xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-5xl font-bold text-untan-navy mb-2">08</div>
+                            <div class="text-[9px] sm:text-[10px] md:text-[10px] lg:text-[10px] xl:text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em]">Labs Modern
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 md:gap-8 lg:gap-10 xl:gap-10">
                     <div
                         class="p-10 rounded-[2.5rem] bg-white border border-slate-100 shadow-soft hover:shadow-soft-lg hover:border-untan-yellow transition-all duration-500 group">
                         <div
@@ -810,26 +899,26 @@
         </section>
 
         <!-- CTA Section -->
-        <section class="bg-slate-50 relative py-28 border-t border-slate-100 reveal" id="cta-section">
-            <div class="max-w-4xl mx-auto px-4 text-center">
+        <section class="bg-slate-50 relative py-16 sm:py-20 md:py-24 lg:py-28 xl:py-28 border-t border-slate-100 reveal" id="cta-section">
+            <div class="max-w-4xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 text-center">
                 <div
-                    class="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-white text-untan-navy mb-12 shadow-soft rotate-3 hover:rotate-0 transition-transform duration-500">
-                    <i class="fa-solid fa-handshake-angle text-4xl"></i>
+                    class="inline-flex items-center justify-center w-20 h-20 sm:w-20 md:w-24 lg:w-24 xl:w-24 sm:h-20 md:h-24 lg:h-24 xl:h-24 rounded-2xl sm:rounded-2.5xl md:rounded-3xl lg:rounded-3xl xl:rounded-3xl bg-white text-untan-navy mb-8 sm:mb-10 md:mb-12 lg:mb-12 xl:mb-12 shadow-soft rotate-3 hover:rotate-0 transition-transform duration-500">
+                    <i class="fa-solid fa-handshake-angle text-3xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-4xl"></i>
                 </div>
-                <h3 class="text-3xl md:text-5xl font-bold text-untan-navy mb-8 font-condensed tracking-tight"
+                <h3 class="text-2xl sm:text-2.5xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-untan-navy mb-5 sm:mb-6 md:mb-8 lg:mb-8 xl:mb-8 font-condensed tracking-tight"
                     data-i18n="ctaTitle">Tertarik Berkolaborasi dengan KBK Kami?</h3>
-                <p class="text-slate-500 mb-14 text-xl leading-relaxed px-4 opacity-80" data-i18n="ctaDesc">
+                <p class="text-slate-500 mb-10 sm:mb-12 md:mb-14 lg:mb-14 xl:mb-14 text-xs sm:text-sm md:text-base lg:text-lg xl:text-lg leading-relaxed px-2 sm:px-4 md:px-6 lg:px-8 xl:px-10 opacity-80" data-i18n="ctaDesc">
                     Kami membuka peluang kerja sama riset lintas institusi, kemitraan strategis dengan industri, serta
                     riset mahasiswa (skripsi/tesis) di bawah supervisi ahli kami.
                 </p>
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 md:gap-6 lg:gap-6 xl:gap-6">
                     <a href="mailto:info@informatika.untan.ac.id"
-                        class="group inline-flex items-center justify-center gap-4 px-14 py-5 text-lg font-bold text-untan-navy transition-all bg-untan-yellow rounded-2xl shadow-soft hover:bg-yellow-400 hover:-translate-y-1 active:scale-95">
-                        <i class="fa-solid fa-envelope text-xl group-hover:animate-bounce"></i>
+                        class="group inline-flex items-center justify-center gap-3 px-10 sm:px-12 md:px-14 lg:px-14 xl:px-14 py-3 sm:py-4 md:py-5 lg:py-5 xl:py-5 text-base sm:text-lg md:text-lg lg:text-lg xl:text-lg font-bold text-untan-navy transition-all bg-untan-yellow rounded-xl sm:rounded-xl md:rounded-2xl lg:rounded-2xl xl:rounded-2xl shadow-soft hover:bg-yellow-400 hover:-translate-y-1 active:scale-95">
+                        <i class="fa-solid fa-envelope text-lg sm:text-xl md:text-xl lg:text-xl xl:text-xl group-hover:animate-bounce"></i>
                         <span data-i18n="ctaBtn">Hubungi Kami</span>
                     </a>
                     <a href="#dosen-section"
-                        class="inline-flex items-center justify-center gap-4 px-12 py-5 text-lg font-bold text-slate-600 transition-all bg-white border border-slate-200 rounded-2xl shadow-soft hover:bg-slate-50 hover:border-slate-300">
+                        class="inline-flex items-center justify-center gap-3 px-10 sm:px-11 md:px-12 lg:px-12 xl:px-12 py-3 sm:py-4 md:py-5 lg:py-5 xl:py-5 text-base sm:text-lg md:text-lg lg:text-lg xl:text-lg font-bold text-slate-600 transition-all bg-white border border-slate-200 rounded-xl sm:rounded-xl md:rounded-2xl lg:rounded-2xl xl:rounded-2xl shadow-soft hover:bg-slate-50 hover:border-slate-300">
                         <span data-i18n="facultyDirectory">Direktori Dosen</span>
                     </a>
                 </div>
@@ -838,18 +927,18 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-untan-dark text-gray-400 py-8 border-t-4 border-untan-yellow">
-        <div class="max-w-7xl mx-auto px-4 text-center sm:flex sm:justify-between sm:text-left text-sm">
+    <footer class="bg-untan-dark text-gray-400 py-6 sm:py-7 md:py-8 lg:py-8 xl:py-8 border-t-4 border-untan-yellow">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 text-center sm:flex sm:justify-between sm:text-left text-xs sm:text-xs md:text-sm lg:text-sm xl:text-sm">
             <p>&copy; 2026 Informatika Universitas Tanjungpura. All rights reserved.</p>
-            <div class="mt-4 sm:mt-0 space-x-4">
+            <div class="mt-3 sm:mt-0 space-x-3 sm:space-x-4 md:space-x-4 lg:space-x-4 xl:space-x-4">
                 <a href="#" class="hover:text-white transition">Instagram</a>
                 <a href="#" class="hover:text-white transition">Website Utama</a>
             </div>
         </div>
     </footer>
     <button id="back-to-top" aria-label="Kembali ke atas"
-        class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-untan-navy text-white shadow-soft hover:bg-untan-blue transition-colors">
-        <i class="fa-solid fa-arrow-up"></i>
+        class="fixed bottom-4 sm:bottom-5 md:bottom-6 lg:bottom-6 xl:bottom-6 right-4 sm:right-5 md:right-6 lg:right-6 xl:right-6 z-40 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-11 lg:h-11 xl:w-11 xl:h-11 rounded-full bg-untan-navy text-white shadow-soft hover:bg-untan-blue transition-colors flex items-center justify-center">
+        <i class="fa-solid fa-arrow-up text-sm sm:text-base md:text-base lg:text-base xl:text-base"></i>
     </button>
 
     <!-- Data Shared -->
@@ -1577,6 +1666,49 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             try {
+                // Handle responsive behavior using matchMedia for reliable breakpoint detection
+                function handleResponsive() {
+                    // Use window.matchMedia for CSS breakpoint detection
+                    const isLgOrLarger = window.matchMedia('(min-width: 1024px)').matches;
+                    
+                    // Find yellow navbar (bg-[#feb401] hidden lg:block)
+                    const navs = document.querySelectorAll('nav');
+                    navs.forEach((nav) => {
+                        const classes = nav.getAttribute('class') || '';
+                        const isYellowNav = classes.includes('bg-[#feb401]');
+                        if (isYellowNav) {
+                            if (isLgOrLarger) {
+                                nav.style.setProperty('display', 'block', 'important');
+                            } else {
+                                nav.style.display = 'none';
+                            }
+                        }
+                    });
+                    
+                    // Find right list (hidden lg:flex)
+                    const rightList = document.querySelector('[class*="hidden"][class*="lg:flex"]');
+                    if (rightList) {
+                        const classes = rightList.getAttribute('class') || '';
+                        const hasHidden = classes.includes('hidden');
+                        const hasLgFlex = classes.includes('lg:flex');
+                        if (hasHidden && hasLgFlex) {
+                            if (isLgOrLarger) {
+                                rightList.style.setProperty('display', 'flex', 'important');
+                            } else {
+                                rightList.style.display = 'none';
+                            }
+                        }
+                    }
+                }
+
+                // Listen for real CSS media query breakpoints
+                const mediaQueryList = window.matchMedia('(min-width: 1024px)');
+                mediaQueryList.addListener((e) => {
+                    handleResponsive();
+                });
+
+                handleResponsive();
+
                 setupMobileMenu();
                 setupScrollUI();
                 setupRevealAnimations();
